@@ -6,6 +6,8 @@ A query on a dictionary.
 """
 
 from collections import Counter
+from functools import reduce
+from operator import or_ as union
 import random
 
 class DictionaryQuery:
@@ -65,5 +67,15 @@ class DictionaryQuery:
                 result.append(word)
         return DictionaryQuery(result)
 
+    def minimal_string(self):
+        """
+        Generate the minimal string that contains all words in the list.
+        """
+        minimal_freq = reduce(union, self.words.values())
+        return ''.join(sorted(minimal_freq.elements()))
+
     def random(self, n=1):
-        return DictionaryQuery([random.choice(self.words) for _ in range(n)])
+        """
+        Generate a random list of words.
+        """
+        return DictionaryQuery([random.choice(list(self.words)) for _ in range(n)])
