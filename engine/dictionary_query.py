@@ -54,7 +54,8 @@ class DictionaryQuery:
         result = []
         for word in self.words:
             if start <= len(word) <= end:
-                result.append()
+                result.append(word)
+        return DictionaryQuery(result)
 
     def filter_from_string(self, string):
         """
