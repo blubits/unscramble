@@ -6,34 +6,30 @@ A dictionary of words.
 """
 
 from collections import Counter
-import random
 
-class Dictionary:
+if __name__ != "__main__":
+    from .dictionary_query import DictionaryQuery
+else:
+    from dictionary_query import DictionaryQuery
+
+class Dictionary(DictionaryQuery):
 
     def __init__(self, filename):
         with open(filename) as dictionary_file:
-            self.words = dictionary_file.read().splitlines()
-            self.frequencies = {word: Counter(word) for word in self.words}
+            self.words = {
+                word: Counter(word)
+                for word in dictionary_file.read().splitlines()
+            }
 
-    def __contains__(self, word):
-        return word in self.words
+    def __repr__(self):
+        return "Dictionary(words={0})".format(len(self))
 
-    def filter_from_string(self, string):
-        """
-        Generate a list of words contained in a string.
+    def __str__(self):
+        return "Dictionary with {0} entries".format(len(self))
 
-        Args:
-            string (str): String of alphabetical characters.
-        """
-        result = []
-        freq_string = Counter(string)
-        for word, freq_word in self.frequencies.items():
-            if all(freq_string[x] >= freq_word[x] for x in freq_word):
-                result.append(word)
-        return result
-
-    def random(self, n=1):
-        return [random.choice(self.words) for _ in range(n)]
-
-    def sort(self):
-        self.words.sort()
+if __name__ == "__main__":
+    dictionary = Dictionary("dictionary.txt")
+    print(dictionary)
+    print("bread" in dictionary)
+    print(dictionary.filter_by_anagram("tar"))
+    print(dictionary.filter_from_string("tnettenba"))
