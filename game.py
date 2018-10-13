@@ -5,9 +5,11 @@ Controller class for SWUG
 :Version:    v20181013
 """
 
+from views.interface_modes import InterfaceModes
+
 class Game:
 
-    def __init__(self, dictionary_address='dictionary.txt'):
+    def __init__(self, interface=InterfaceModes.terminal):
         raise NotImplementedError
 
     def run(self):

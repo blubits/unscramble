@@ -1,6 +1,13 @@
+"""
+Enum class for interface modes
+
+:Author:     Jose Enrico Salinas
+:Version:    v20181013
+"""
+
 from enum import Enum
 
 class InterfaceModes(Enum):
-    terminal = "INTEFACE.MODES.TERMINAL"
+    terminal = "INTERFACE.MODES.TERMINAL"
     web = "INTERFACE.MODES.WEB"
     desktop = "INTERFACE.MODES.DESKTOP"
