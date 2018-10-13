@@ -1,3 +1,9 @@
+"""
+
+:Author:     Jose Enrico Salinas
+:Version:    v20181013
+"""
+
 import unittest
 
 from engine.dictionary import Dictionary
