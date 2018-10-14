@@ -9,5 +9,4 @@ from enum import Enum
 
 class InterfaceModes(Enum):
     terminal = "INTERFACE.MODES.TERMINAL"
-    web = "INTERFACE.MODES.WEB"
     desktop = "INTERFACE.MODES.DESKTOP"
