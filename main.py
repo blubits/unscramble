@@ -1,3 +1,11 @@
+"""
+Main launch file to start the game
+and process launch options
+
+:Author:     Jose Enrico Salinas
+:Version:    v20181013
+"""
+
 import sys
 
 from views.interface_modes import InterfaceModes
