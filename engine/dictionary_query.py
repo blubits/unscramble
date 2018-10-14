@@ -5,7 +5,7 @@ A query on a dictionary.
 :Version:    v20181013
 """
 
-from collections import Counter
+from collections import Counter, defaultdict
 from functools import reduce
 from operator import or_ as union
 import random
@@ -34,6 +34,18 @@ class DictionaryQuery:
         return "Query from dictionary: [{0}]".format(
             ", ".join(word for word in self.words))
 
+    def group_by_length(self):
+        """
+        Group a list of words by length.
+        """
+        grouping = defaultdict(list)
+        for word in self.words:
+            key = len(word)
+            grouping[key].append(word)
+        for key in grouping:
+            grouping[key].sort()
+        return dict(grouping)
+
     def filter_by_anagram(self, term):
         """
         Generate all anagrams of a certain word.
@@ -54,7 +66,8 @@ class DictionaryQuery:
         result = []
         for word in self.words:
             if start <= len(word) <= end:
-                result.append()
+                result.append(word)
+        return DictionaryQuery(result)
 
     def filter_from_string(self, string):
         """
