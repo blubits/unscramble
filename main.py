@@ -15,7 +15,7 @@ if __name__ == "__main__":
     launch_args = sys.argv
 
     dictionary_address = "dictionary.txt"
-    if launch_args[1][-4:] == ".txt":
+    if len(launch_args) > 1 and launch_args[1][-4:] == ".txt":
         dictionary_address = launch_args[1]
 
     interface_mode = InterfaceModes.terminal
@@ -26,5 +26,6 @@ if __name__ == "__main__":
 
     try:
         game = Game(interface=interface_mode, dictionary=dictionary_address)
+        game.run()
     except(FileNotFoundError):
         print("Dictionary file cannot be located.")

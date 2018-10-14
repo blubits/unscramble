@@ -2,5 +2,7 @@
     "python.unitTest.promptToConfigure": false,
     "python.unitTest.pyTestEnabled": false,
     "python.unitTest.unittestEnabled": true,
-    "python.unitTest.nosetestsEnabled": false
+    "python.unitTest.nosetestsEnabled": false,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true
 }
