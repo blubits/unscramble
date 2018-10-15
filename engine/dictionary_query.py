@@ -22,7 +22,7 @@ class DictionaryQuery:
         return word in self.words
 
     def __iter__(self):
-        return sorted(iter(self.words))
+        return iter(sorted(self.words))
 
     def __len__(self):
         return len(self.words)
@@ -34,17 +34,11 @@ class DictionaryQuery:
         return "Query from dictionary: [{0}]".format(
             ", ".join(word for word in self.words))
 
-    def group_by_length(self):
+    def choice(self):
         """
-        Group a list of words by length.
+        Select a random word.
         """
-        grouping = defaultdict(list)
-        for word in self.words:
-            key = len(word)
-            grouping[key].append(word)
-        for key in grouping:
-            grouping[key].sort()
-        return dict(grouping)
+        return random.choice(list(self.words))
 
     def filter_by_anagram(self, term):
         """
@@ -79,6 +73,18 @@ class DictionaryQuery:
             if all(freq_string[x] >= freq_word[x] for x in freq_word):
                 result.append(word)
         return DictionaryQuery(result)
+
+    def group_by_length(self):
+        """
+        Group a list of words by length.
+        """
+        grouping = defaultdict(list)
+        for word in self.words:
+            key = len(word)
+            grouping[key].append(word)
+        for key in grouping:
+            grouping[key].sort()
+        return dict(grouping)
 
     def minimal_string(self):
         """

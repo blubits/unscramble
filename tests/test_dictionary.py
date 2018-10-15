@@ -5,7 +5,7 @@
 """
 
 import unittest
-from engine.dictionary import Dictionary
+from engine import Dictionary
 
 class Test_TestDictionary(unittest.TestCase):
 
