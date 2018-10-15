@@ -28,7 +28,7 @@ class GameBoard:
         words_per_column = ceil(len(self.query) / columns)
         board = [[] for _ in range(columns)]
         col = 0
-        for length, words in sorted(self.query.group_by_length().items()):
+        for _, words in sorted(self.query.group_by_length().items()):
             for word in words:
                 if self.board[word]:
                     w = word
