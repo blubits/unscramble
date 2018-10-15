@@ -37,10 +37,11 @@ class GameBoard:
                 board[col].append(w.ljust(15))
                 if len(board[col]) == words_per_column:
                     col += 1
-        return '\n'.join(["String: {0}".format(self.string)] + [
-            ' '.join(row[i] if len(row) > i else '' for row in board)
-            for i in range(words_per_column)
-        ])
+        return '\n'.join(
+            ["String: {0}".format(self.string)] +
+            [' '.join(row[i] if len(row) > i else '' for row in board)
+             for i in range(words_per_column)]
+        )
 
     def answer(self, word):
         if word in self.query:
