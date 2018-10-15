@@ -21,6 +21,14 @@ class DictionaryQuery:
     def __contains__(self, word):
         return word in self.words
 
+    def __eq__(self, other):
+        if isinstance(other, list):
+            return other == list(self)
+        elif isinstance(other, DictionaryQuery):
+            return list(other) == list(self)
+        else:
+            return False
+
     def __iter__(self):
         return iter(sorted(self.words))
 
