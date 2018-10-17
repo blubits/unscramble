@@ -44,13 +44,13 @@ class DictionaryQuery:
 
     def choice(self):
         """
-        Select a random word.
+        Selects a random word.
         """
         return random.choice(list(self.words))
 
     def filter_by_anagram(self, term):
         """
-        Generate all anagrams of a certain word.
+        Generates all anagrams of a certain word.
         """
         result = []
         freq_term = Counter(term)
@@ -61,7 +61,7 @@ class DictionaryQuery:
 
     def filter_by_length(self, start, end=None):
         """
-        Generate a list of words with a certain length.
+        Generates a list of words with a certain length.
         """
         if end is None:
             end = start
@@ -73,7 +73,7 @@ class DictionaryQuery:
 
     def filter_from_string(self, string):
         """
-        Generate a list of words contained in a string.
+        Generates a list of words contained in a string.
         """
         result = []
         freq_string = Counter(string)
@@ -84,7 +84,7 @@ class DictionaryQuery:
 
     def group_by_length(self):
         """
-        Group a list of words by length.
+        Groups a list of words by length.
         """
         grouping = defaultdict(list)
         for word in self.words:
@@ -96,13 +96,13 @@ class DictionaryQuery:
 
     def minimal_string(self):
         """
-        Generate the minimal string that contains all words in the list.
+        Generates the minimal string that contains all words in the list.
         """
         minimal_freq = reduce(union, self.words.values())
         return ''.join(sorted(minimal_freq.elements()))
 
     def random(self, n=1):
         """
-        Generate a random list of words.
+        Generates a random list of words.
         """
         return DictionaryQuery([random.choice(list(self.words)) for _ in range(n)])
