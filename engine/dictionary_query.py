@@ -2,7 +2,8 @@
 A query on a dictionary.
 
 :Author:     Maded Batara III
-:Version:    v20181013
+:Author:     Jose Enrico Salinas
+:Version:    v20181020
 """
 
 from collections import Counter, defaultdict
