@@ -1,4 +1,4 @@
-class Interface_Handler():
+class InterfaceHandler():
 
-    def run():
+    def run(self):
         raise NotImplementedError
