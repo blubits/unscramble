@@ -5,7 +5,7 @@ Controller class for SWUG
 :Version:    v20181013
 """
 
-from engine.model import Model
+from engine.engine import Engine
 
 from views.interface_modes import InterfaceModes
 from views.terminal.terminal_basic import BasicTerminalInterface
@@ -15,16 +15,16 @@ from views.pyglet.desktop import DesktopInterface
 class Controller:
 
     def __init__(self, interface, dictionary):
-        self.model = Model(dictionary)
+        self.engine = Engine(dictionary)
         self.interface_mode = interface
 
         if self.interface_mode == InterfaceModes.terminal_basic:
-            self.interface = BasicTerminalInterface(self.model)
+            self.interface = BasicTerminalInterface(self.engine)
         elif self.interface_mode == InterfaceModes.terminal_advanced:
             #TODO: Implement advanced terminal interface
             pass
         elif self.interface_mode == InterfaceModes.desktop:
-            self.interface = DesktopInterface(self.model)
+            self.interface = DesktopInterface(self.engine)
         else:
             raise ValueError
 

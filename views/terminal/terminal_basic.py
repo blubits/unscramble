@@ -9,9 +9,9 @@ from ..interface_handler import InterfaceHandler
 
 class BasicTerminalInterface(InterfaceHandler):
 
-    def __init__(self, model):
-        self.model = model
-        self.game_board = model.game_board
+    def __init__(self, engine):
+        self.engine = engine
+        self.game_board = engine.game_board
 
     def run(self):
 

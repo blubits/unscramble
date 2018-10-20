@@ -9,7 +9,7 @@ and process launch options
 import sys
 
 from views.interface_modes import InterfaceModes
-from game import Game
+from controller import Controller
 
 if __name__ == "__main__":
     launch_args = sys.argv
@@ -25,7 +25,7 @@ if __name__ == "__main__":
         interface_mode = InterfaceModes.terminal_advanced
 
     try:
-        game = Game(interface=interface_mode, dictionary=dictionary_address)
+        game = Controller(interface=interface_mode, dictionary=dictionary_address)
         game.run()
     except(FileNotFoundError):
         print("Dictionary file cannot be located.")

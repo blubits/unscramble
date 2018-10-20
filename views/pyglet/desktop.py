@@ -13,9 +13,9 @@ from pyglet.window import event
 
 class DesktopInterface(InterfaceHandler):
 
-    def __init__(self, model):
+    def __init__(self, engine):
+        self.engine = engine
         self.window = pyglet.window.Window()
-        self.model = model
-
+ 
     def run(self):
         pyglet.app.run()
