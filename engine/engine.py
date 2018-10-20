@@ -55,8 +55,8 @@ class Engine:
     def is_complete(self):
         return self.game_board.is_complete()
 
-    def is_dead(self)
-        if self.retries = 0:
+    def is_dead(self):
+        if self.retries == 0:
             return True
         return False
 
