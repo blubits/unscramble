@@ -22,21 +22,24 @@ class Engine:
 
     def set_game_mode(self, game_mode):
         if game_mode == GameModes.anagrams:
-            self.game_mode = game_mode
             self.game_board = GameBoard(self.dictionary.choice(), self.dictionary)
         elif game_mode == GameModes.random:
-            self.game_mode = game_mode
-            self.game_board = GameBoard(self.dictionary.filter_from_random_string(), self.dictionary)
+            self.game_board = GameBoard(self.dictionary.random_string(), self.dictionary)
         else:
             raise ValueError
+        self.game_mode = game_mode
 
     def set_game_restrictions(self, game_restrictions):
-        if game_restrictions == GameModes.timed or game_restrictions == GameModes.timed_retries:
-            self.game_restrictions = game_restrictions
+        if  game_restrictions == GameModes.timed_retries:
             self.time = 120000      #max game time in milliseconds
-        if game_restrictions == GameModes.retries or game_restrictions == GameModes.timed_retries:
-            self.game_restrictions = game_restrictions
             self.retries = 3
+        elif game_restrictions == GameModes.timed:
+            self.time = 120000      #max game time in milliseconds
+        elif game_restrictions == GameModes.retries:
+            self.retries = 3
+        else:
+            raise ValueError
+        self.game_restrictions = game_restrictions
 
     def answer(self, term):
         correct = self.game_board.answer(term)
