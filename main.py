@@ -14,7 +14,7 @@ from game import Game
 if __name__ == "__main__":
     launch_args = sys.argv
 
-    dictionary_address = "dictionary.txt"
+    dictionary_address = "resources/dict/dictionary.txt"
     if len(launch_args) > 1 and launch_args[1][-4:] == ".txt":
         dictionary_address = launch_args[1]
 
