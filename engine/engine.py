@@ -19,6 +19,7 @@ class Engine:
         self.game_restrictions = None
         self.time = None
         self.retries = None
+        self.dead = False
 
     def __str__(self):
         return self.game_board.__str__()
@@ -36,10 +37,10 @@ class Engine:
         if  game_restrictions == GameModes.vanilla:
             pass
         elif game_restrictions == GameModes.timed_retries:
-            self.time = 120000      #max game time in milliseconds
+            self.time = 60      #max game time in milliseconds
             self.retries = 3
         elif game_restrictions == GameModes.timed:
-            self.time = 120000      #max game time in milliseconds
+            self.time = 60      #max game time in milliseconds
         elif game_restrictions == GameModes.retries:
             self.retries = 3
         else:
@@ -49,16 +50,16 @@ class Engine:
     def answer(self, term):
         correct = self.game_board.answer(term)
         if (self.game_restrictions == GameModes.retries or self.game_restrictions == GameModes.timed_retries) and not correct:
-            self.retries -= 1 
+            self.retries -= 1
+        if self.retries == 0:
+            self.dead = True
         return correct
 
     def is_complete(self):
         return self.game_board.is_complete()
 
     def is_dead(self):
-        if self.retries == 0:
-            return True
-        return False
+        return self.dead
 
     def reset(self):
         self.game_board = None

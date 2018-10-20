@@ -16,7 +16,6 @@ class BasicTerminalInterface(InterfaceHandler):
         self.engine.set_game_mode(GameModes.random)
         self.engine.set_game_restrictions(GameModes.retries)
 
-
     def run(self):
         if self.engine.game_restrictions == GameModes.retries or self.engine.game_restrictions == GameModes.timed_retries:
             print("Lives: {}".format(self.engine.retries))
