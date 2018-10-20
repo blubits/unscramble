@@ -13,13 +13,18 @@ class BasicTerminalInterface(InterfaceHandler):
 
     def __init__(self, engine):
         self.engine = engine
-        self.engine.set_game_mode(GameModes.anagrams)
-        self.game_board = engine.game_board
+        self.engine.set_game_mode(GameModes.random)
+        self.engine.set_game_restrictions(GameModes.retries)
+
 
     def run(self):
-
-        print(self.game_board)
-        while not self.game_board.is_complete():
+        if self.engine.game_restrictions == GameModes.retries or self.engine.game_restrictions == GameModes.timed_retries:
+            print("Lives: {}".format(self.engine.retries))
+        print(self.engine)
+        while not self.engine.is_complete() and not self.engine.is_dead():
             answer = input("Guess a word: ")
-            self.game_board.answer(answer)
-            print(self.game_board)
+            self.engine.answer(answer)
+
+            if self.engine.game_restrictions == GameModes.retries or self.engine.game_restrictions == GameModes.timed_retries:
+                print("Lives: {}".format(self.engine.retries))
+            print(self.engine)

@@ -17,8 +17,8 @@ class Engine:
         self.game_board = None
         self.game_mode = None
         self.game_restrictions = None
-        self.time = 0
-        self.retries = 0
+        self.time = None
+        self.retries = None
 
     def __str__(self):
         return self.game_board.__str__()
