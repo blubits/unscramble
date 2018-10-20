@@ -43,3 +43,10 @@ class Engine:
         if (self.game_restrictions == GameModes.retries or self.game_restrictions == GameModes.timed_retries) and not correct:
             self.retries -= 1 
         return correct
+
+    def reset(self):
+        self.game_board = None
+        self.game_mode = None
+        self.game_restrictions = None
+        self.time = 0
+        self.retries = 0
