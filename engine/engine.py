@@ -20,6 +20,9 @@ class Engine:
         self.time = 0
         self.retries = 0
 
+    def __str__(self):
+        return self.game_board.__str__()
+
     def set_game_mode(self, game_mode):
         if game_mode == GameModes.anagrams:
             self.game_board = GameBoard(self.dictionary.choice(), self.dictionary)
@@ -30,7 +33,9 @@ class Engine:
         self.game_mode = game_mode
 
     def set_game_restrictions(self, game_restrictions):
-        if  game_restrictions == GameModes.timed_retries:
+        if  game_restrictions == GameModes.vanilla:
+            pass
+        elif game_restrictions == GameModes.timed_retries:
             self.time = 120000      #max game time in milliseconds
             self.retries = 3
         elif game_restrictions == GameModes.timed:
@@ -46,6 +51,14 @@ class Engine:
         if (self.game_restrictions == GameModes.retries or self.game_restrictions == GameModes.timed_retries) and not correct:
             self.retries -= 1 
         return correct
+
+    def is_complete(self):
+        return self.game_board.is_complete()
+
+    def is_dead(self)
+        if self.retries = 0:
+            return True
+        return False
 
     def reset(self):
         self.game_board = None

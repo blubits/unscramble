@@ -11,6 +11,7 @@ class GameModes(Enum):
     anagrams = "ENGINE.MODES.ANAGRAMS"
     random = "ENGINE.MODES.RANDOM"
 
+    vanilla = "ENGINE.RESTRICTIONS.VANILLA"
     retries = "ENGINE.RESTRICTIONS.RETRIES"
     timed = "ENGINE.RESTRICTIONS.TIMED"
     timed_retries = "ENGINE.RESTRICTIONS.TIMEDRETRIES"
