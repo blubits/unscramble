@@ -18,11 +18,11 @@ if __name__ == "__main__":
     if len(launch_args) > 1 and launch_args[1][-4:] == ".txt":
         dictionary_address = launch_args[1]
 
-    interface_mode = InterfaceModes.terminal
+    interface_mode = InterfaceModes.terminal_basic
     if '-d' in launch_args:
         interface_mode = InterfaceModes.desktop
-    elif '-w' in launch_args:
-        interface_mode = InterfaceModes.web
+    elif '-a' in launch_args:
+        interface_mode = InterfaceModes.terminal_advanced
 
     try:
         game = Game(interface=interface_mode, dictionary=dictionary_address)

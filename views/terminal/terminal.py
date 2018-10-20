@@ -1,8 +1,8 @@
 import urwid
 
-from ..inteface import Interface
+from ..interface_handler import Interface_Handler
 
-class TerminalInterface(Interface):
+class BasicTerminalInterface(Interface_Handler):
 
     def __init__(self):
         txt = urwid.Text(u"Hello World")
