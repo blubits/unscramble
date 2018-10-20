@@ -1,11 +1,17 @@
-import urwid
+"""
+A basic terminal interface using stdin and stdout.
 
-from ..interface_handler import Interface_Handler
+:Author:     Jose Enrico Salinas
+:Version:    v20181020
+"""
 
-class BasicTerminalInterface(Interface_Handler):
+from ..interface_handler import InterfaceHandler
 
-    def __init__(self, dictionary, game_board):
-        self.game_board = game_board
+class BasicTerminalInterface(InterfaceHandler):
+
+    def __init__(self, model):
+        self.model = model
+        self.game_board = model.game_board
 
     def run(self):
 
