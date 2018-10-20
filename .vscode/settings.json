@@ -1,9 +1,9 @@
 {
-    "python.unitTest.promptToConfigure": false,
-    "python.unitTest.pyTestEnabled": false,
+    "python.unitTest.pyTestArgs": [
+        "."
+    ],
     "python.unitTest.unittestEnabled": true,
     "python.unitTest.nosetestsEnabled": false,
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": true,
-    "python.pythonPath": "C:\\dev\\Python36\\python.exe"
+    "python.unitTest.pyTestEnabled": false,
+    "python.unitTest.promptToConfigure": false
 }
