@@ -6,7 +6,7 @@ A desktop interface for SWUG using pyglet
 """
 
 
-from ..interface_handler import InterfaceHandler
+from .interface_handler import InterfaceHandler
 
 import pyglet
 from pyglet.window import event

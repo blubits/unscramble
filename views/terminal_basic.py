@@ -5,12 +5,15 @@ A basic terminal interface using stdin and stdout.
 :Version:    v20181020
 """
 
-from ..interface_handler import InterfaceHandler
+from .interface_handler import InterfaceHandler
+from engine.game_modes import GameModes
+
 
 class BasicTerminalInterface(InterfaceHandler):
 
     def __init__(self, engine):
         self.engine = engine
+        self.engine.set_game_mode(GameModes.anagrams)
         self.game_board = engine.game_board
 
     def run(self):

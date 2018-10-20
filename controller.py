@@ -8,8 +8,8 @@ Controller class for SWUG
 from engine.engine import Engine
 
 from views.interface_modes import InterfaceModes
-from views.terminal.terminal_basic import BasicTerminalInterface
-from views.pyglet.desktop import DesktopInterface
+from views.terminal_basic import BasicTerminalInterface
+from views.desktop import DesktopInterface
 
 
 class Controller:
