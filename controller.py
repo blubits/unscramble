@@ -12,7 +12,7 @@ from views.terminal.terminal_basic import BasicTerminalInterface
 from views.pyglet.desktop import DesktopInterface
 
 
-class Game:
+class Controller:
 
     def __init__(self, interface, dictionary):
         self.model = Model(dictionary)
