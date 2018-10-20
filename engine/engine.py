@@ -1,3 +1,11 @@
+"""
+SWUG Game Engine
+
+:Author:     Jose Enrico Salinas
+:Version:    v20181020
+"""
+
+
 from .game_board import GameBoard
 from .dictionary import Dictionary
 
