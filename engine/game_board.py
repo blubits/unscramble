@@ -2,7 +2,8 @@
 A game board (i.e. list of words).
 
 :Author:     Maded Batara III
-:Version:    v20181014
+:Author:     Jose Enrico Salinas
+:Version:    v20181020
 """
 
 from math import ceil
@@ -46,3 +47,9 @@ class GameBoard:
     def answer(self, word):
         if word in self.query:
             self.board[word] = True
+
+    def is_complete(self):
+        for word in self.board.values():
+            if not word:
+                return False
+        return True
