@@ -37,3 +37,9 @@ class Engine:
         if game_restrictions == GameModes.retries or game_restrictions == GameModes.timed_retries:
             self.game_restrictions = game_restrictions
             self.retries = 3
+
+    def answer(self, term):
+        correct = self.game_board.answer(term)
+        if (self.game_restrictions == GameModes.retries or self.game_restrictions == GameModes.timed_retries) and not correct:
+            self.retries -= 1 
+        return correct

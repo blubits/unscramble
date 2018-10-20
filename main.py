@@ -26,7 +26,7 @@ if __name__ == "__main__":
         interface_mode = InterfaceModes.terminal_advanced
 
     try:
-        game = Controller(interface=interface_mode, dictionary=dictionary_address)
-        game.run()
+        controller = Controller(interface=interface_mode, dictionary=dictionary_address)
+        controller.run()
     except(FileNotFoundError):
         print("Dictionary file cannot be located.")
