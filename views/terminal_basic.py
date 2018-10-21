@@ -63,9 +63,9 @@ class BasicTerminalInterface(InterfaceHandler):
         while not self.engine.is_complete() and not self.engine.is_dead():
             answer = input("Guess a word: ")
             self.engine.answer(answer)
-
+            
+            print(self.engine)
             if self.engine.game_restrictions == GameModes.retries or self.engine.game_restrictions == GameModes.timed_retries:
                 print("Lives: {}".format(self.engine.retries))
             if self.engine.game_restrictions == GameModes.timed or self.engine.game_restrictions == GameModes.timed_retries:
                 print("Time remaining: {}".format(self.engine.time_remaining()))
-            print(self.engine)
