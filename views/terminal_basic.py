@@ -18,7 +18,7 @@ class BasicTerminalInterface(InterfaceHandler):
 
         game_mode_choice = None
         while True:
-            print("Select game mode [anagram / random]")
+            print("Select game mode [anagram / random / exit]")
             game_mode_choice = input()
             if game_mode_choice == "anagram" or game_mode_choice == "a":
                 self.engine.set_game_mode(GameModes.anagrams)
@@ -28,9 +28,30 @@ class BasicTerminalInterface(InterfaceHandler):
                 self.engine.set_game_mode(GameModes.random)
                 print()
                 break
-            elif game_mode_choice == "exit":
+            elif game_mode_choice == "exit" or game_mode_choice == "e":
                 self.engine.reset()
                 return
+
+        game_restrictions_choice = None
+        while True:
+            print("Select game mode [lives / timed / timedlives / exit]")
+            game_restrictions_choice = input()
+            if game_restrictions_choice == "lives" or game_restrictions_choice == "l":
+                self.engine.set_game_restrictions(GameModes.retries)
+                print()
+                break
+            elif game_restrictions_choice == "timed" or game_restrictions_choice == "t":
+                self.engine.set_game_restrictions(GameModes.timed)
+                print()
+                break
+            elif game_restrictions_choice == "timedlives" or game_restrictions_choice == "h":
+                self.engine.set_game_restrictions(GameModes.timed_retries)
+                print()
+                break
+            elif game_mode_choice == "exit" or game_restrictions_choice == "e":
+                self.engine.reset()
+                return
+
 
         self.engine.start()
 
