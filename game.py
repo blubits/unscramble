@@ -19,14 +19,15 @@ class Game:
         self.game_board = GameBoard(self.dictionary.choice(), self.dictionary)
 
         if self.interface_mode == InterfaceModes.terminal_basic:
-            #TODO: Implement basic terminal interface
-            self.interface = BasicTerminalInterface(self.dictionary, self.game_board)
+            # TODO: Implement basic terminal interface
+            self.interface = BasicTerminalInterface(
+                self.dictionary, self.game_board)
             pass
         elif self.interface_mode == InterfaceModes.terminal_advanced:
-            #TODO: Implement advanced terminal interface
+            # TODO: Implement advanced terminal interface
             pass
         elif self.interface_mode == InterfaceModes.desktop:
-            #TODO: Implement desktop interface
+            # TODO: Implement desktop interface
             pass
         else:
             raise ValueError
