@@ -47,6 +47,8 @@ class GameBoard:
     def answer(self, word):
         if word in self.query:
             self.board[word] = True
+            return True
+        return False
 
     def is_complete(self):
         for word in self.board.values():
