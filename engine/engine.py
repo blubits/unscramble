@@ -71,7 +71,7 @@ class Engine:
 
     def time_remaining(self):
         if self.game_restrictions == GameModes.timed or self.game_restrictions == GameModes.timed_retries:
-                return self.timer.remaining()
+            return self.timer.remaining()
         else:
             return None
 
