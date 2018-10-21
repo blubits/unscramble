@@ -62,9 +62,11 @@ class Engine:
 
     def set_dead(self, dead):
         self.dead = dead
+        if self.game_restrictions == GameModes.timed or self.game_restrictions == GameModes.timed_retries and self.dead:
+            self.timer.stop()
 
     def toggle_dead(self):
-        self.dead = not self.dead
+        self.set_dead(not self.dead)
 
     def is_dead(self):
         return self.dead

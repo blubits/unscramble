@@ -18,3 +18,6 @@ class GameTimer(Timer):
     
     def remaining(self):
         return self.interval - self.elapsed()
+
+    def stop(self):
+        return self.cancel()
