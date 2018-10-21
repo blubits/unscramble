@@ -21,6 +21,7 @@ class Engine:
         self.time = None
         self.retries = None
         self.dead = False
+        self.timer = None
 
     def __str__(self):
         return self.game_board.__str__()
@@ -69,5 +70,7 @@ class Engine:
         self.game_board = None
         self.game_mode = None
         self.game_restrictions = None
-        self.time = 0
-        self.retries = 0
+        self.time = None
+        self.retries = None
+        self.dead = False
+        self.timer = None
