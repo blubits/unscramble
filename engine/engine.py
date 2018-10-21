@@ -9,6 +9,7 @@ SWUG Game Engine
 from .game_board import GameBoard
 from .dictionary import Dictionary
 from .game_modes import GameModes
+from .timer import GameTimer
 
 class Engine:
 
@@ -37,10 +38,10 @@ class Engine:
         if  game_restrictions == GameModes.vanilla:
             pass
         elif game_restrictions == GameModes.timed_retries:
-            self.time = 60      #max game time in milliseconds
+            self.time = 60      #max game time in seconds
             self.retries = 3
         elif game_restrictions == GameModes.timed:
-            self.time = 60      #max game time in milliseconds
+            self.time = 60      #max game time in seconds
         elif game_restrictions == GameModes.retries:
             self.retries = 3
         else:
@@ -57,6 +58,9 @@ class Engine:
 
     def is_complete(self):
         return self.game_board.is_complete()
+
+    def set_dead(self, dead):
+        self.dead = dead
 
     def is_dead(self):
         return self.dead
