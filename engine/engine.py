@@ -53,7 +53,7 @@ class Engine:
         if (self.game_restrictions == GameModes.retries or self.game_restrictions == GameModes.timed_retries) and not correct:
             self.retries -= 1
         if self.retries == 0:
-            self.dead = True
+            self.set_dead(True)
         return correct
 
     def is_complete(self):
