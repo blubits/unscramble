@@ -21,7 +21,7 @@ class Controller:
         if self.interface_mode == InterfaceModes.terminal_basic:
             self.interface = BasicTerminalInterface(self.engine)
         elif self.interface_mode == InterfaceModes.terminal_advanced:
-            #TODO: Implement advanced terminal interface
+            # TODO: Implement advanced terminal interface
             pass
         elif self.interface_mode == InterfaceModes.desktop:
             self.interface = DesktopInterface(self.engine)
