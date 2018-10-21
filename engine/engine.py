@@ -63,8 +63,24 @@ class Engine:
     def set_dead(self, dead):
         self.dead = dead
 
+    def toggle_dead(self):
+        self.dead = not self.dead
+
     def is_dead(self):
         return self.dead
+
+    def time_remaining(self):
+        if self.game_restrictions == GameModes.timed or self.game_restrictions == GameModes.timed_retries:
+                return self.timer.remaining()
+        else:
+            return None
+
+    def start(self):
+        if self.game_restrictions == GameModes.timed or self.game_restrictions == GameModes.timed_retries:
+            if self.is_dead():
+                raise RuntimeError("Tried to start dead game engine.")
+            self.timer = GameTimer(self.time, self.toggle_dead)
+            self.timer.start()
 
     def reset(self):
         self.game_board = None
