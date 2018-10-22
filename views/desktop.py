@@ -7,7 +7,7 @@ A desktop interface for SWUG using pyglet
 
 
 from .interface_handler import InterfaceHandler
-from .desktop_states import DesktopStates
+from .interface_states import InterfaceStates
 
 import time
 
@@ -17,7 +17,7 @@ class DesktopInterface(InterfaceHandler):
 
     def __init__(self, engine):
         self.engine = engine
-        self.desktop_state = DesktopStates.intro
+        self.desktop_state = InterfaceStates.intro
         self.window = pyglet.window.Window()
 
         #Event handlers
@@ -25,7 +25,7 @@ class DesktopInterface(InterfaceHandler):
         def on_draw():
             self.window.clear()
 
-            if self.desktop_state == DesktopStates.intro:
+            if self.desktop_state == InterfaceStates.intro:
                 self.draw_intro()
                 pyglet.clock.schedule_once(self.set_to_menu, 3)
 
@@ -85,7 +85,7 @@ class DesktopInterface(InterfaceHandler):
         credits_two.draw()
 
     def set_to_menu(self, callback=None):
-        self.desktop_state = DesktopStates.menu
+        self.desktop_state = InterfaceStates.menu
  
     def run(self):
         pyglet.app.run()
