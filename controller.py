@@ -10,6 +10,7 @@ from engine.engine import Engine
 from views.interface_modes import InterfaceModes
 from views.terminal_basic import BasicTerminalInterface
 from views.desktop import DesktopInterface
+from views.terminal_advanced import AdvancedTerminalInterface
 
 
 class Controller:
@@ -21,8 +22,7 @@ class Controller:
         if self.interface_mode == InterfaceModes.terminal_basic:
             self.interface = BasicTerminalInterface(self.engine)
         elif self.interface_mode == InterfaceModes.terminal_advanced:
-            # TODO: Implement advanced terminal interface
-            pass
+            self.interface = AdvancedTerminalInterface(self.engine)
         elif self.interface_mode == InterfaceModes.desktop:
             self.interface = DesktopInterface(self.engine)
         else:
