@@ -10,10 +10,6 @@ from engine.game_modes import GameModes
 
 class BasicTerminalInterface(InterfaceHandler):
 
-    def __init__(self, engine):
-        self.engine = engine
-        self.engine.set_game_restrictions(GameModes.timed_retries)
-
     def run(self):
 
         game_mode_choice = None
