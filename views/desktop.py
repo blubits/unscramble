@@ -18,7 +18,7 @@ class DesktopInterface(InterfaceHandler):
     def __init__(self, engine):
         self.engine = engine
         self.desktop_state = InterfaceStates.intro
-        self.window = pyglet.window.Window()
+        self.window = pyglet.window.Window(resizable=True)
 
         #Event handlers
         @self.window.event
