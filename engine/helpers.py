@@ -5,8 +5,6 @@ Helper functions and constants for the game engine.
 :Version:    v20181024
 """
 
-from enum import Enum
-
 LETTER_POINTS = {
     'e': 1,
     'a': 1,
@@ -35,14 +33,6 @@ LETTER_POINTS = {
     'q': 10,
     'z': 10
 }
-
-class GameModes(Enum):
-    ALL_WORDS = 0
-    ANAGRAMS = 1
-
-class GameRestrictions(Enum):
-    THREE_TRIES = 0
-    TIMED = 1
 
 def score(word):
     """
