@@ -110,12 +110,6 @@ class DictionaryQuery:
 
     def random_string(self, n=1):
         """
-        Generates the minimal string from a list of random words with n elements.
+        Generates the minimal string from a list of random words.
         """
         return self.random(n=n).minimal_string()
-
-    def filter_from_random_string(self, n=1):
-        """
-        Generates a DictionaryQuery from the minimal string of a list of random words with n elements.
-        """
-        return self.filter_from_string(self.random_string(n=n))
