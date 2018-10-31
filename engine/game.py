@@ -30,8 +30,8 @@ class Game:
             raise ValueError("game is already on game over")
 
     def answer(self, term):
-        if not self.is_game_over() and not self.board.fill(term) and self.retries is not None:
+        if not self.is_game_over and not self.board.fill(term) and self.retries is not None:
             self.retries -= 1
             self.current_score += score(term)
         if self.retries == 0:
-            self.is_active = True
+            self.is_game_over = True
