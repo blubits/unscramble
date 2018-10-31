@@ -11,7 +11,6 @@ class Game:
 
     def __init__(self, query, *, retries=None):
         self.board = GameBoard(query)
-        self.mode = mode
         self.current_score = 0
         self.maximum_score = sum(score(word) for word in self.board)
         self.retries = retries
