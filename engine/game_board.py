@@ -9,6 +9,7 @@ A game board (i.e. list of words).
 from math import ceil
 
 class GameBoard:
+    """A board with a list of words to fill up."""
 
     def __init__(self, query):
         """
@@ -25,12 +26,21 @@ class GameBoard:
             self.board[word] = False
 
     def __iter__(self):
+        """
+        Implements iter(gameboard).
+        """
         return iter(self.query)
 
     def __len__(self):
+        """
+        Implements len(GameBoard).
+        """
         return len(self.query)
 
     def __str__(self):
+        """
+        Implements str(GameBoard).
+        """
         words_per_column = ceil(len(self.query) / self.columns)
         board = [[] for _ in range(self.columns)]
         col = 0
