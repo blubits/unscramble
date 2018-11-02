@@ -92,7 +92,7 @@ class GameBoard:
         """
         return self.query.group_by_length()
 
-    def words_by_length(self):
+    def words_by_length_filled(self):
         """
         Returns a dictionary view of all filled-up words in the board,
         sorted by length.
