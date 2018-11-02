@@ -5,6 +5,5 @@
     "python.unitTest.unittestEnabled": true,
     "python.unitTest.nosetestsEnabled": false,
     "python.unitTest.pyTestEnabled": false,
-    "python.unitTest.promptToConfigure": false,
-    "python.pythonPath": "/home/jetsalinas/.local/share/virtualenvs/unscramble-Nx3p0wJC/bin/python"
+    "python.unitTest.promptToConfigure": false
 }
