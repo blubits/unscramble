@@ -1,25 +1,27 @@
 """
-Controller class for SWUG
+Controller class that initializes game dictionary,
+and interfaces
 
 :Author:     Jose Enrico Salinas
 :Version:    v20181013
 """
 
 from engine.game import Game
+from engine.dictionary import Dictionary
 
 from views.interface_modes import InterfaceModes
-from views.terminal_basic import BasicTerminalInterface
+from views.terminal import TerminalInterface
 from views.desktop import DesktopInterface
 
 
 class Controller:
 
     def __init__(self, interface, dictionary):
-        self.game = Game(dictionary)
         self.interface_mode = interface
+        self.game = Game(Dictionary(dictionary))
 
         if self.interface_mode == InterfaceModes.terminal:
-            self.interface = BasicTerminalInterface(self.game)
+            self.interface = TerminalInterface(self.game)
         elif self.interface_mode == InterfaceModes.desktop:
             self.interface = DesktopInterface(self.game)
         else:
