@@ -7,7 +7,6 @@ and process launch options
 """
 
 import sys
-sys.path.append("..")
 
 from views.interface_modes import InterfaceModes
 from controller import Controller
