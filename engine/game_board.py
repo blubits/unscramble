@@ -10,9 +10,16 @@ from math import ceil
 
 class GameBoard:
 
-    def __init__(self, query, columns=7):
+    def __init__(self, query):
+        """
+        Initializes a new game board.
+
+        Args:
+            query (DictionaryQuery): A list of words queried from the
+                dictionary.
+        """
         self.query = query
-        self.columns = columns
+        self.columns = 7
         self.board = {}
         for word in self.query:
             self.board[word] = False
@@ -42,12 +49,27 @@ class GameBoard:
         )
 
     def fill(self, word):
+        """
+        Fills a word on the board.
+
+        Args:
+            word (str): Word to put on the board.
+
+        Returns:
+            bool: True if the word is on the board, False otherwise.
+        """
         if word in self.query:
             self.board[word] = True
             return True
         return False
 
     def is_complete(self):
+        """
+        Checks if a board is completely filled up.format
+
+        Returns:
+            bool: True if board is filled up, False otherwise.
+        """
         for word in self.board.values():
             if not word:
                 return False
