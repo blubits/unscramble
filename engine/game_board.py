@@ -67,6 +67,20 @@ class GameBoard:
             return True
         return False
 
+    def is_filled(self, word):
+        """
+        Checks if a word is already filled up on the board.
+
+        Args:
+            word (str): Word to check on the board.
+
+        Returns:
+            bool: True if the word is on the board, False otherwise.
+        """
+        if word in self.query:
+            return self.board[word]
+        return False
+
     def is_complete(self):
         """
         Checks if a board is completely filled up.format
