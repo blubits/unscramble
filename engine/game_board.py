@@ -26,21 +26,15 @@ class GameBoard:
             self.board[word] = False
 
     def __iter__(self):
-        """
-        Implements iter(gameboard).
-        """
+        """Implements iter(gameboard)."""
         return iter(self.query)
 
     def __len__(self):
-        """
-        Implements len(GameBoard).
-        """
+        """Implements len(GameBoard)."""
         return len(self.query)
 
     def __str__(self):
-        """
-        Implements str(GameBoard).
-        """
+        """Implements str(GameBoard)."""
         words_per_column = ceil(len(self.query) / self.columns)
         board = [[] for _ in range(self.columns)]
         col = 0
