@@ -18,11 +18,8 @@ class Controller:
         self.game = Game(dictionary)
         self.interface_mode = interface
 
-        if self.interface_mode == InterfaceModes.terminal_basic:
+        if self.interface_mode == InterfaceModes.terminal:
             self.interface = BasicTerminalInterface(self.game)
-        elif self.interface_mode == InterfaceModes.terminal_advanced:
-            # TODO: Implement advanced terminal interface
-            pass
         elif self.interface_mode == InterfaceModes.desktop:
             self.interface = DesktopInterface(self.game)
         else:
