@@ -20,6 +20,7 @@ class GameBoard:
                 dictionary.
         """
         self.query = query
+        self.filled_up_words = 0
         self.columns = 7
         self.board = {}
         for word in self.query:
@@ -35,22 +36,8 @@ class GameBoard:
 
     def __str__(self):
         """Implements str(GameBoard)."""
-        words_per_column = ceil(len(self.query) / self.columns)
-        board = [[] for _ in range(self.columns)]
-        col = 0
-        for _, words in sorted(self.query.group_by_length().items()):
-            for word in words:
-                if self.board[word]:
-                    w = word
-                else:
-                    w = "_" * len(word)
-                board[col].append(w.ljust(15))
-                if len(board[col]) == words_per_column:
-                    col += 1
-        return '\n'.join(
-            [' '.join(row[i] if len(row) > i else '' for row in board)
-             for i in range(words_per_column)]
-        )
+        return "GameBoard, {0}/{1} filled up".format(
+            self.filled_up_words, len(self))
 
     def fill(self, word):
         """
@@ -92,3 +79,33 @@ class GameBoard:
             if not word:
                 return False
         return True
+
+    def words_by_length(self):
+        """
+        Returns a dictionary view of all words in the board, sorted by length.
+        Equivalent to calling self.query.group_by_length().
+
+        Returns:
+            dict: A dictionary of all words in the board, grouped
+                by length of the word. Words are sorted alphabetically
+                within the list.
+        """
+        return self.query.group_by_length()
+
+    def words_by_length(self):
+        """
+        Returns a dictionary view of all filled-up words in the board,
+        sorted by length.
+
+        Returns:
+            dict: A dictionary of all words in the board, grouped
+                by length of the word. Words are sorted alphabetically
+                within the list. All words not filled up are replaced
+                with None.
+        """
+        g = self.words_by_length()
+        for _, words in g:
+            for i in range(len(words)):
+                if not self.is_filled(words[i]):
+                    words[i] = None
+        return g
