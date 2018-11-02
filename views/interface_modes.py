@@ -8,6 +8,5 @@ Enum class for interface modes
 from enum import Enum
 
 class InterfaceModes(Enum):
-    terminal_basic = "INTERFACE.MODES.TERMINAL.BASIC"
-    terminal_advanced = "INTERFACE.MODES.TERMINAL.ADVANCED"
-    desktop = "INTERFACE.MODES.DESKTOP"
+    terminal = 0
+    desktop = 1
