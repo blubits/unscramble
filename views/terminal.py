@@ -10,4 +10,5 @@ from .interface_handler import InterfaceHandler
 class TerminalInterface(InterfaceHandler):
 
     def run(self):
-        print("Henlo world")
+        print("In TerminalInterface")
+        
