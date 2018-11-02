@@ -9,21 +9,32 @@ A game board (i.e. list of words).
 from math import ceil
 
 class GameBoard:
+    """A board with a list of words to fill up."""
 
-    def __init__(self, query, columns=7):
+    def __init__(self, query):
+        """
+        Initializes a new game board.
+
+        Args:
+            query (DictionaryQuery): A list of words queried from the
+                dictionary.
+        """
         self.query = query
-        self.columns = columns
+        self.columns = 7
         self.board = {}
         for word in self.query:
             self.board[word] = False
 
     def __iter__(self):
+        """Implements iter(gameboard)."""
         return iter(self.query)
 
     def __len__(self):
+        """Implements len(GameBoard)."""
         return len(self.query)
 
     def __str__(self):
+        """Implements str(GameBoard)."""
         words_per_column = ceil(len(self.query) / self.columns)
         board = [[] for _ in range(self.columns)]
         col = 0
@@ -42,12 +53,27 @@ class GameBoard:
         )
 
     def fill(self, word):
+        """
+        Fills a word on the board.
+
+        Args:
+            word (str): Word to put on the board.
+
+        Returns:
+            bool: True if the word is on the board, False otherwise.
+        """
         if word in self.query:
             self.board[word] = True
             return True
         return False
 
     def is_complete(self):
+        """
+        Checks if a board is completely filled up.format
+
+        Returns:
+            bool: True if board is filled up, False otherwise.
+        """
         for word in self.board.values():
             if not word:
                 return False
