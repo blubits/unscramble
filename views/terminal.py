@@ -8,6 +8,6 @@ A basic terminal interface.
 from .interface_handler import InterfaceHandler
 
 class TerminalInterface(InterfaceHandler):
-    
-    def __init__(self, game):
-        pass
+
+    def run(self):
+        print("Henlo world")

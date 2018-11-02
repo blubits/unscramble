@@ -21,9 +21,9 @@ class Controller:
         self.game = Game(Dictionary(dictionary))
 
         if self.interface_mode == InterfaceModes.terminal:
-            self.interface = TerminalInterface(self.game)
+            self.interface = TerminalInterface()
         elif self.interface_mode == InterfaceModes.desktop:
-            self.interface = DesktopInterface(self.game)
+            self.interface = DesktopInterface()
         else:
             raise ValueError
 
