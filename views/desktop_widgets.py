@@ -25,6 +25,7 @@ class MenuWidget(glooey.Widget):
 class MenuLabel(glooey.Label):
     custom_color = "white"
     custom_font_name = "Ubuntu"
+    custom_font_size = 16
 
 class MenuButton(glooey.Button):
     Label = MenuLabel
