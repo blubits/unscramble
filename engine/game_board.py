@@ -6,6 +6,7 @@ A game board (i.e. list of words).
 :Version:    v20181024
 """
 
+from collections import OrderedDict
 from math import ceil
 
 class GameBoard:
@@ -20,6 +21,7 @@ class GameBoard:
                 dictionary.
         """
         self.query = query
+        self.num_words = len(self.query)
         self.filled_up_words = 0
         self.columns = 7
         self.board = {}
@@ -32,7 +34,7 @@ class GameBoard:
 
     def __len__(self):
         """Implements len(GameBoard)."""
-        return len(self.query)
+        return self.num_words
 
     def __str__(self):
         """Implements str(GameBoard)."""
@@ -51,6 +53,7 @@ class GameBoard:
         """
         if word in self.query:
             self.board[word] = True
+            self.filled_up_words += 1
             return True
         return False
 
@@ -75,10 +78,7 @@ class GameBoard:
         Returns:
             bool: True if board is filled up, False otherwise.
         """
-        for word in self.board.values():
-            if not word:
-                return False
-        return True
+        return self.filled_up_words == self.num_words
 
     def words_by_length(self):
         """
@@ -103,9 +103,10 @@ class GameBoard:
                 within the list. All words not filled up are replaced
                 with None.
         """
-        g = self.words_by_length()
-        for _, words in g:
+        g = OrderedDict()
+        for length, words in sorted(self.words_by_length().items()):
+            g[length] = words
             for i in range(len(words)):
                 if not self.is_filled(words[i]):
                     words[i] = None
-        return g
+        return dict(g)
