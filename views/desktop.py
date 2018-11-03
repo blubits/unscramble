@@ -19,11 +19,18 @@ class DesktopInterface(Interface):
         self.window = pyglet.window.Window(width=1200, height=900)
         self.gui = glooey.Gui(self.window)
 
+        background = TiledBackground()
+        self.gui.add(background)
+
         self.menu = MenuWidget()
         self.gui.add(self.menu)
 
         @self.window.event
         def on_draw():
+
+            #clear all widgets
+            self.menu.do_undraw()
+
             if self.state == DesktopStates.intro:
                 # TODO: Implement intro display
                 pass

@@ -7,25 +7,35 @@ class MenuWidget(glooey.Widget):
 
     def __init__(self):
         super().__init__()
+        title = TitleLabel("SWUG 0.1")
 
         menu_hbox = glooey.HBox()
-        self.untimed_btn = MenuButton("Untimed")
-        self.retries_btn = MenuButton("Retries")
-        self.timed_btn = MenuButton("Timed")
-        self.timed_retries_btn = MenuButton("Timed + Retries")
-        menu_hbox.add(self.untimed_btn)
-        menu_hbox.add(self.retries_btn)
-        menu_hbox.add(self.timed_btn)
-        menu_hbox.add(self.timed_retries_btn)
+        untimed_btn = MenuButton("Untimed")
+        retries_btn = MenuButton("Retries")
+        timed_btn = MenuButton("Timed")
+        timed_retries_btn = MenuButton("Timed + Retries")
+        menu_hbox.add(untimed_btn)
+        menu_hbox.add(retries_btn)
+        menu_hbox.add(timed_btn)
+        menu_hbox.add(timed_retries_btn)
 
         vbox = glooey.VBox()
+        vbox.add(title)
         vbox.add(menu_hbox)
         self._attach_child(vbox)
 
 class MenuLabel(glooey.Label):
     custom_color = "white"
     custom_font_name = "Ubuntu"
-    custom_font_size = 16
+    custom_font_size = 18
 
 class MenuButton(glooey.Button):
     Label = MenuLabel
+
+class TiledBackground(glooey.Background):
+    custom_center = pyglet.resource.texture("resources/images/background.png")
+
+class TitleLabel(MenuLabel):
+    custom_font_size = 70
+    custom_alignment = "center"
+    custom_padding = 10
