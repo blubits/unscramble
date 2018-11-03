@@ -11,4 +11,4 @@ class DesktopStates(Enum):
     intro = 0
     menu = 1
     options = 2
-game = 3
+    game = 3
