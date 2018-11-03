@@ -15,6 +15,7 @@ import glooey
 class DesktopInterface(Interface):
 
     def __init__(self):
+        super().__init__()
         self.state = DesktopStates.intro
         self.window = pyglet.window.Window(width=1200, height=900)
 
@@ -40,8 +41,8 @@ class DesktopInterface(Interface):
                 # TODO: Implement options display
                 pass
             elif self.state == DesktopStates.game:
-                # TODO: Implement game display
-                self.game._draw()
+                self.clear_window()
+                self.game.add(self.game)
             self.gui.on_draw()
 
         def intro_state(dt):
