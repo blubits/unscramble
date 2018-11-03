@@ -17,6 +17,19 @@ class Interface():
 
     def __init__(self):
         self.view_events = ViewEvents()
+        self.controller = None
+
+    def on_answer_correct(self):
+        raise NotImplementedError
+
+    def on_answer_wrong(self):
+        raise NotImplementedError
+
+    def on_answer_duplicate(self):
+        raise NotImplementedError
+
+    def on_end(self):
+        raise NotImplementedError
 
     def run(self):
         raise NotImplementedError

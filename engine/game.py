@@ -39,6 +39,7 @@ class Game:
         self.current_score = 0
         self.maximum_score = sum(score(word) for word in self.board)
         self.retries = retries
+        self.maximum_retries = retries
         self._is_game_over = False
 
     @property
@@ -65,10 +66,14 @@ class Game:
         Returns:
             bool: True if the word is on the board, False otherwise.
         """
-        if not self.is_game_over and not self.board.fill(term) and self.retries is not None:
-            self.retries -= 1
+        if self.is_game_over:
+            return False
+        if self.board.fill(term):
             self.current_score += score(term)
             return True
-        if self.retries == 0:
-            self.is_game_over = True
-        return False
+        else:
+            if self.retries is not None:
+                self.retries -= 1
+                if self.retries == 0:
+                    self.is_game_over = True
+                return False
