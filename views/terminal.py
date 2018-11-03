@@ -5,7 +5,7 @@ A basic terminal interface.
 :Version:    v20181102
 """
 
-from .interface_handler import Interface
+from .interface import Interface
 
 class TerminalInterface(Interface):
 
