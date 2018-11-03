@@ -19,13 +19,15 @@ class Controller:
             dictionary_file (str): Path to the dictionary file to
                 load.
         """
+        self.dictionary = Dictionary(dictionary_file)
+        self.current_game = None
+
         self.interface = interface
         # Enable two-way communication between C and V
         # On the view side, self.controller.controller_events can
         # then be used to register event handlers
         self.interface.controller = self
-        self.dictionary = Dictionary(dictionary_file)
-        self.current_game = None
+
         self.controller_events = ControllerEvents()
         # register view event handlerrs
         self.interface.view_events.create += self.on_create
@@ -42,7 +44,7 @@ class Controller:
             self.current_game = Game(word, query)
 
     def on_answer(self, word):
-        if self.current_game.board.is_filled(word):
+        if self.current_game.on_board(word):
             self.controller_events.answer_duplicate()
         else:
             if self.current_game.answer(word):

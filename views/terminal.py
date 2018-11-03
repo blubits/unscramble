@@ -48,8 +48,11 @@ class TerminalInterface(Interface):
         print()
 
     def on_end(self):
-        print("Game over :(")
-        print("Score: {0}/{1}".format(self.controller.current_game.score,
+        if self.controller.current_game.won():
+            print("Congratulations, you won!")
+        else:
+            print("Game over :(")
+        print("Score: {0}/{1}".format(self.controller.current_game.current_score,
                                       self.controller.current_game.maximum_score))
         self.game_end = True
 

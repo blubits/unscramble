@@ -70,6 +70,8 @@ class Game:
             return False
         if self.board.fill(term):
             self.current_score += score(term)
+            if self.won():
+                self.is_game_over = True
             return True
         else:
             if self.retries is not None:
