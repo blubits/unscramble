@@ -5,13 +5,13 @@ A desktop interface for SWUG using pyglet
 :Version:    v20181102
 """
 
-from .interface_handler import InterfaceHandler
+from .interface_handler import Interface
 from .desktop_states import DesktopStates
 
 import pyglet
 import glooey
 
-class DesktopInterface(InterfaceHandler):
+class DesktopInterface(Interface):
 
     def __init__(self):
         self.window = pyglet.window.Window(width=1200, height=900)

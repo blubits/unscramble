@@ -15,7 +15,7 @@ class Controller:
         Initializes a new Controller.
 
         Args:
-            interface (InterfaceHandler): A client/view of the SWUG engine.
+            interface (Interface): A client/view of the SWUG engine.
             dictionary_file (str): Path to the dictionary file to
                 load.
         """

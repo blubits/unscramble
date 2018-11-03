@@ -5,10 +5,9 @@ A basic terminal interface.
 :Version:    v20181102
 """
 
-from .interface_handler import InterfaceHandler
+from .interface_handler import Interface
 
-class TerminalInterface(InterfaceHandler):
+class TerminalInterface(Interface):
 
     def run(self):
         print("In TerminalInterface")
-        
