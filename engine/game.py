@@ -77,3 +77,9 @@ class Game:
                 if self.retries == 0:
                     self.is_game_over = True
                 return False
+
+    def won(self):
+        """
+        Check if game is in a win condition.
+        """
+        return len(self.board) == self.board.filled_up_words
