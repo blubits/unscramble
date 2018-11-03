@@ -6,8 +6,8 @@ name = "pypi"
 [packages]
 pyglet = "*"
 urwid = "*"
-npyscreen = "*"
 glooey = "*"
+events = "*"
 
 [dev-packages]
 pylint = "*"

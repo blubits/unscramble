@@ -2,16 +2,13 @@
 An enumeration of game modes
 
 :Author:     Jose Enrico Salinas
-:Version:    v20181020
+:Version:    v20181102
 """
 
 from enum import Enum
 
-class GameModes(Enum):
-    anagrams = "ENGINE.MODES.ANAGRAMS"
-    random = "ENGINE.MODES.RANDOM"
-
-    vanilla = "ENGINE.RESTRICTIONS.VANILLA"
-    retries = "ENGINE.RESTRICTIONS.RETRIES"
-    timed = "ENGINE.RESTRICTIONS.TIMED"
-    timed_retries = "ENGINE.RESTRICTIONS.TIMEDRETRIES"
+class GameMode(Enum):
+    UNTIMED = 0
+    RETRIES = 1
+    TIMED = 2
+    TIMED_RETRIES = 3

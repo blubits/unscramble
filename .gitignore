@@ -1,5 +1,6 @@
 testing.py
 *.code-workspace
+*.afdesign
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

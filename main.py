@@ -7,9 +7,8 @@ and process launch options
 """
 
 import sys
-sys.path.append("..")
 
-from views.interface_modes import InterfaceModes
+from views import DesktopInterface, TerminalInterface
 from controller import Controller
 
 if __name__ == "__main__":
@@ -19,14 +18,13 @@ if __name__ == "__main__":
     if len(launch_args) > 1 and launch_args[1][-4:] == ".txt":
         dictionary_address = launch_args[1]
 
-    interface_mode = InterfaceModes.terminal_basic
+    interface_mode = TerminalInterface()
     if '-d' in launch_args:
-        interface_mode = InterfaceModes.desktop
-    elif '-a' in launch_args:
-        interface_mode = InterfaceModes.terminal_advanced
+        interface_mode = DesktopInterface()
 
     try:
-        controller = Controller(interface=interface_mode, dictionary=dictionary_address)
-        controller.run()
-    except(FileNotFoundError):
+        controller = Controller(interface=interface_mode,
+                                dictionary_file=dictionary_address)
+        controller.run_interface()
+    except FileNotFoundError:
         print("Dictionary file cannot be located.")

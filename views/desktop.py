@@ -2,90 +2,72 @@
 A desktop interface for SWUG using pyglet
 
 :Author:     Jose Enrico Salinas
-:Version:    v20181020
+:Version:    v20181102
 """
 
-
-from .interface_handler import InterfaceHandler
-from .interface_states import InterfaceStates
-
-import time
+from .interface import Interface
+from .desktop_states import DesktopStates
+from .desktop_widgets import *
 
 import pyglet
+import glooey
 
-class DesktopInterface(InterfaceHandler):
+class DesktopInterface(Interface):
 
-    def __init__(self, engine):
-        self.engine = engine
-        self.desktop_state = InterfaceStates.intro
-        self.window = pyglet.window.Window(resizable=True)
+    def __init__(self):
+        super().__init__()
+        self.state = DesktopStates.game
+        self.window = pyglet.window.Window(width=1200, height=900)
 
-        #Event handlers
+        background = TiledBackground()
+
+        self.gui = glooey.Gui(self.window)
+        self.gui.add(background)
+
+        self.intro = IntroWidget()
+        self.menu = MenuWidget()
+        self.game = GameWidget()
+
         @self.window.event
         def on_draw():
-            self.window.clear()
+            if self.state == DesktopStates.intro:
+                self.clear_window()
+                self.gui.add(self.intro)
+                pyglet.clock.schedule_once(menu_state, 2)
+            elif self.state == DesktopStates.menu:
+                self.clear_window()
+                self.gui.add(self.menu)
+            elif self.state == DesktopStates.options:
+                # TODO: Implement options display
+                pass
+            elif self.state == DesktopStates.game:
+                self.clear_window()
+                self.gui.add(self.game)
+            self.gui.on_draw()
 
-            if self.desktop_state == InterfaceStates.intro:
-                self.draw_intro()
-                pyglet.clock.schedule_once(self.set_to_menu, 3)
+        def intro_state(dt):
+            self.state = DesktopStates.intro
 
-    def draw_intro(self):
+        def menu_state(dt):
+            self.state = DesktopStates.menu
 
-        game_font_name = 'Ubuntu'
+        def game_state(dt):
+            self.state = DesktopStates.game
 
-        main_title = pyglet.text.Label('SWUG',
-            font_name = game_font_name,
-            font_size = 36,
-            x = self.window.width//2,
-            y = self.window.height//2,
-            anchor_x = 'center',
-            anchor_y = 'center'
-        )
+    def clear_window(self):
+        try:
+            self.gui.remove(self.intro)
+        except glooey.helpers.UsageError:
+            pass
+        try:
+            self.gui.remove(self.menu)
+        except glooey.helpers.UsageError:
+            pass
+        try:
+            self.gui.remove(self.game)
+        except glooey.helpers.UsageError:
+            pass
 
-        sub_title = pyglet.text.Label('The Simple Word Unscrabler Game',
-            font_name = game_font_name,
-            font_size = 12,
-            x = self.window.width//2,
-            y = self.window.height//2 - 36,
-            anchor_x = 'center',
-            anchor_y = 'center'
-        )
-
-        credits_by = pyglet.text.Label('by',
-            font_name = game_font_name,
-            font_size = 8,
-            x = self.window.width//2,
-            y = self.window.height//2 - 60,
-            anchor_x = 'center',
-            anchor_y = 'center'
-        )
-
-        credits_one = pyglet.text.Label('Maded Batara',
-            font_name = game_font_name,
-            font_size = 10,
-            x = self.window.width//2,
-            y = self.window.height//2 - 70,
-            anchor_x = 'center',
-            anchor_y = 'center'
-        )
-
-        credits_two = pyglet.text.Label('Jose Enrico Salinas',
-            font_name = game_font_name,
-            font_size = 8,
-            x = self.window.width//2,
-            y = self.window.height//2 - 82,
-            anchor_x = 'center',
-            anchor_y = 'center'
-        )
-
-        main_title.draw()
-        sub_title.draw()
-        credits_by.draw()
-        credits_one.draw()
-        credits_two.draw()
-
-    def set_to_menu(self, callback=None):
-        self.desktop_state = InterfaceStates.menu
- 
     def run(self):
         pyglet.app.run()
+        print("In DesktopInterface")
