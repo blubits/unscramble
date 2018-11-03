@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
     try:
         controller = Controller(interface=interface_mode,
-                                dictionary=dictionary_address)
-        controller.run()
-    except(FileNotFoundError):
+                                dictionary_file=dictionary_address)
+        controller.run_interface()
+    except FileNotFoundError:
         print("Dictionary file cannot be located.")
