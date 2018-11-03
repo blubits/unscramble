@@ -21,6 +21,7 @@ class GameBoard:
                 dictionary.
         """
         self.query = query
+        self.num_words = len(self.query)
         self.filled_up_words = 0
         self.columns = 7
         self.board = {}
@@ -33,7 +34,7 @@ class GameBoard:
 
     def __len__(self):
         """Implements len(GameBoard)."""
-        return len(self.query)
+        return self.num_words
 
     def __str__(self):
         """Implements str(GameBoard)."""
@@ -77,10 +78,7 @@ class GameBoard:
         Returns:
             bool: True if board is filled up, False otherwise.
         """
-        for word in self.board.values():
-            if not word:
-                return False
-        return True
+        return self.filled_up_words == self.num_words
 
     def words_by_length(self):
         """
