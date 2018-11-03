@@ -6,26 +6,38 @@ and interfaces
 :Version:    v20181013
 """
 
-from engine.game import Game
-from engine.dictionary import Dictionary
-
-from views.interface_modes import InterfaceModes
-from views.terminal import TerminalInterface
-from views.desktop import DesktopInterface
-
+from engine import Dictionary, Game, GameMode, ControllerEvents
 
 class Controller:
 
-    def __init__(self, interface, dictionary):
-        self.interface_mode = interface
-        self.game = Game(Dictionary(dictionary))
+    def __init__(self, interface, dictionary_file):
+        """
+        Initializes a new Controller.
 
-        if self.interface_mode == InterfaceModes.terminal:
-            self.interface = TerminalInterface()
-        elif self.interface_mode == InterfaceModes.desktop:
-            self.interface = DesktopInterface()
+        Args:
+            interface (InterfaceHandler): A client/view of the SWUG engine.
+            dictionary_file (str): Path to the dictionary file to
+                load.
+        """
+        self.interface = interface
+        self.dictionary = Dictionary(dictionary_file)
+        self.current_game = None
+        self.controller_events = ControllerEvents()
+        # TODO register event handlers
+
+    def on_game_create(self, game_mode, word_length):
+        word = self.dictionary.filter_by_length(word_length).choice()
+        query = self.dictionary.filter_from_string(word)
+        if game_mode == GameMode.TIMED_RETRIES or game_mode == GameMode.RETRIES:
+            self.current_game = Game(word, query, retries=3)
         else:
-            raise ValueError
+            self.current_game = Game(word, query)
 
-    def run(self):
+    def on_game_answer(self, word):
+        pass
+
+    def on_game_over(self):
+        pass
+
+    def run_interface(self):
         self.interface.run()
