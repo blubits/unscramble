@@ -7,7 +7,7 @@ A desktop interface for SWUG using pyglet
 
 from .interface import Interface
 from .desktop_states import DesktopStates
-from .widgets import *
+from .desktop_widgets import *
 
 import pyglet
 import glooey
