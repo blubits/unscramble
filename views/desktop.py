@@ -5,7 +5,7 @@ A desktop interface for SWUG using pyglet
 :Version:    v20181102
 """
 
-from .interface_handler import Interface
+from .interface import Interface
 from .desktop_states import DesktopStates
 from .widgets import *
 
