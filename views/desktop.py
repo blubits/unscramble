@@ -15,29 +15,59 @@ import glooey
 class DesktopInterface(Interface):
 
     def __init__(self):
-        self.state = DesktopStates.menu
+        super().__init__()
+        self.state = DesktopStates.intro
         self.window = pyglet.window.Window(width=1200, height=900)
-        self.gui = glooey.Gui(self.window)
 
+        background = TiledBackground()
+
+        self.gui = glooey.Gui(self.window)
+        self.gui.add(background)
+
+        self.intro = IntroWidget()
         self.menu = MenuWidget()
-        self.gui.add(self.menu)
+        self.game = GameWidget()
 
         @self.window.event
         def on_draw():
             if self.state == DesktopStates.intro:
-                # TODO: Implement intro display
-                pass
+                self.clear_window()
+                self.gui.add(self.intro)
+                pyglet.clock.schedule_once(menu_state, 2)
             elif self.state == DesktopStates.menu:
-                # TODO: Implement menu display
-                # self.draw_menu()
-                self.menu.do_draw()
+                self.clear_window()
+                self.gui.add(self.menu)
             elif self.state == DesktopStates.options:
                 # TODO: Implement options display
-                print("In Options")
+                pass
             elif self.state == DesktopStates.game:
-                # TODO: Implement game display
-                print("In game")
+                self.clear_window()
+                self.game.add(self.game)
             self.gui.on_draw()
+
+        def intro_state(dt):
+            self.state = DesktopStates.intro
+
+        def menu_state(dt):
+            self.state = DesktopStates.menu
+
+        def game_state(dt):
+            self.state = DesktopStates.game
+
+    def clear_window(self):
+                try:
+                    self.gui.remove(self.intro)
+                except glooey.helpers.UsageError:
+                    pass
+                try:
+                    self.gui.remove(self.menu)
+                except glooey.helpers.UsageError:
+                    pass
+                try:
+                    self.gui.remove(self.game)
+                except glooey.helpers.UsageError:
+                    pass
+
 
     def run(self):
         pyglet.app.run()
