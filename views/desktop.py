@@ -16,7 +16,7 @@ class DesktopInterface(Interface):
 
     def __init__(self):
         super().__init__()
-        self.state = DesktopStates.intro
+        self.state = DesktopStates.game
         self.window = pyglet.window.Window(width=1200, height=900)
 
         background = TiledBackground()
@@ -42,7 +42,7 @@ class DesktopInterface(Interface):
                 pass
             elif self.state == DesktopStates.game:
                 self.clear_window()
-                self.game.add(self.game)
+                self.gui.add(self.game)
             self.gui.on_draw()
 
         def intro_state(dt):

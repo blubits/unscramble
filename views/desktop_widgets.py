@@ -56,6 +56,17 @@ class GameWidget(glooey.Widget):
 
         self.vbox = glooey.VBox()
         self.game_board_hbox = glooey.HBox()
+        self.game_input = GameInputWidget()
 
         self.vbox.add(self.game_board_hbox)
+        self.vbox.add(self.game_input)
         self._attach_child(self.vbox)
+
+class GameInputWidget(glooey.Widget):
+
+    def __init__(self):
+        super().__init__()
+
+        self.vbox = glooey.VBox()
+        self._attach_child(self.vbox)
+
