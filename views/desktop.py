@@ -25,20 +25,19 @@ class DesktopInterface(Interface):
         @self.window.event
         def on_draw():
             if self.state == DesktopStates.intro:
-                #TODO: Implement intro display
+                # TODO: Implement intro display
                 pass
             elif self.state == DesktopStates.menu:
-                #TODO: Implement menu display
+                # TODO: Implement menu display
                 # self.draw_menu()
                 self.menu.do_draw()
             elif self.state == DesktopStates.options:
-                #TODO: Implement options display
+                # TODO: Implement options display
                 print("In Options")
             elif self.state == DesktopStates.game:
-                #TODO: Implement game display
+                # TODO: Implement game display
                 print("In game")
             self.gui.on_draw()
-
 
     def run(self):
         pyglet.app.run()

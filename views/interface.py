@@ -8,9 +8,15 @@ Abstract base class for all Interfaces.
 from engine import ViewEvents
 
 class Interface():
+    """
+    A view for the SWUG game engine.
+
+    Attributes:
+        self.view_events (ViewEvents): Events happening on the view.
+    """
 
     def __init__(self):
-        self.view_events = None
+        self.view_events = ViewEvents()
 
     def run(self):
         raise NotImplementedError
