@@ -80,6 +80,13 @@ class Game:
 
     def won(self):
         """
-        Check if game is in a win condition.
+        Checks if the game is in a win condition, i.e. everything in the board
+        is filled up.
         """
-        return len(self.board) == self.board.filled_up_words
+        return self.board.is_complete()
+
+    def on_board(self, term):
+        """
+        Checks if a word is already on the board.
+        """
+        return self.board.is_filled(term)
