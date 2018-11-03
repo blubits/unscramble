@@ -57,16 +57,32 @@ class GameWidget(glooey.Widget):
         self.vbox = glooey.VBox()
         self.game_board_hbox = glooey.HBox()
         self.game_input = GameInputWidget()
+        self.game_options = GameOptionsWidget()
 
         self.vbox.add(self.game_board_hbox)
         self.vbox.add(self.game_input)
+        self.vbox.add(self.game_options)
         self._attach_child(self.vbox)
 
 class GameInputWidget(glooey.Widget):
+
+    custom_alignment = "center"
 
     def __init__(self):
         super().__init__()
 
         self.vbox = glooey.VBox()
+        self.vbox.add(MenuLabel("GameInputWidget"))
         self._attach_child(self.vbox)
+
+class GameOptionsWidget(glooey.Widget):
+
+    custom_alignment = "center"
+
+    def __init__(self):
+        super().__init__()
+
+        self.hbox = glooey.HBox()
+        self.hbox.add(MenuLabel("GameOptionsWidget"))
+        self._attach_child(self.hbox)
 
