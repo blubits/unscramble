@@ -55,7 +55,8 @@ class Controller:
             self.controller_events.end()
 
     def on_end(self):
-        pass
+        if not self.current_game.is_game_over:
+            self.current_game.is_game_over = True
 
     def run_interface(self):
         self.interface.run()
