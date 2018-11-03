@@ -21,16 +21,20 @@ class Game:
         maximum_score (int): Maximum score achievable by a player.
     """
 
-    def __init__(self, query, *, retries=None):
+    def __init__(self, word, query, *, retries=None):
         """
         Initializes a new Game.
 
         Args:
+            word (str): Word to form the board from. Note that it is
+                not guaranteed that this matches the query; the
+                controller is responsible for making sure it matches.
             query (DictionaryQuery): A list of words queried from the
-                dictionary
+                dictionary.
             retries (int, optional): Number of retries (i.e. wrong answers)
                 before the game hits Game Over.
         """
+        self.word = word
         self.board = GameBoard(query)
         self.current_score = 0
         self.maximum_score = sum(score(word) for word in self.board)

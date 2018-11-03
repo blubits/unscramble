@@ -7,12 +7,8 @@ An enumeration of game modes
 
 from enum import Enum
 
-class GameModes(Enum):
-    anagrams = 0
-    random = 1
-
-class GameRestrictions(Enum):
-    vanilla = 0
-    retries = 1
-    timed = 2
-    timed_retries = 3
+class GameMode(Enum):
+    UNTIMED = 0
+    RETRIES = 1
+    TIMED = 2
+    TIMED_RETRIES = 3

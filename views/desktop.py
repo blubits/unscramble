@@ -5,14 +5,14 @@ A desktop interface for SWUG using pyglet
 :Version:    v20181102
 """
 
-from .interface_handler import InterfaceHandler
+from .interface_handler import Interface
 from .desktop_states import DesktopStates
 from .widgets import *
 
 import pyglet
 import glooey
 
-class DesktopInterface(InterfaceHandler):
+class DesktopInterface(Interface):
 
     def __init__(self):
         self.state = DesktopStates.menu
@@ -43,7 +43,3 @@ class DesktopInterface(InterfaceHandler):
     def run(self):
         pyglet.app.run()
         print("In DesktopInterface")
-
-    def draw_menu(self):
-        print("In Menu")
-        

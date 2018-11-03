@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5f061f191c150d7ef70baa3c4977bcc774ebc365414656a22b5b3e49f35bcdaa"
+            "sha256": "359f7f379134bfe4480038e267c13ace4b578d81b4c0199128693b81081ef396"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -27,6 +27,13 @@
                 "sha256:f8bed30c8e80d0d0da5af8745da07502692c36604e039ba93b25f560eb7cf5d9"
             ],
             "version": "==0.2.0"
+        },
+        "events": {
+            "hashes": [
+                "sha256:f4d9c41a5c160ce504278f219fe56f44242ca63794a0ad638b52d1e087ac2a41"
+            ],
+            "index": "pypi",
+            "version": "==0.3"
         },
         "future": {
             "hashes": [
@@ -108,6 +115,14 @@
             ],
             "index": "pypi",
             "version": "==1.4.2"
+        },
+        "colorama": {
+            "hashes": [
+                "sha256:a3d89af5db9e9806a779a50296b5fdb466e281147c2c235e8225ecc6dbf7bbf3",
+                "sha256:c9b54bebe91a6a803e0772c8561d53f2926bfeb17cd141fbabcb08424086595c"
+            ],
+            "markers": "sys_platform == 'win32'",
+            "version": "==0.4.0"
         },
         "flake8": {
             "hashes": [
