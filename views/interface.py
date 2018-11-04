@@ -7,7 +7,7 @@ Abstract base class for all Interfaces.
 
 from engine import ViewEvents
 
-class Interface():
+class Interface:
     """
     A view for the SWUG game engine.
 
@@ -18,6 +18,11 @@ class Interface():
     def __init__(self):
         self.view_events = ViewEvents()
         self.controller = None
+
+    @property
+    def current_game(self):
+        """Game: Current game on the controller."""
+        return self.controller.current_game
 
     def on_answer_correct(self):
         raise NotImplementedError

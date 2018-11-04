@@ -105,8 +105,8 @@ class GameBoard:
         """
         g = OrderedDict()
         for length, words in sorted(self.words_by_length().items()):
-            g[length] = words
-            for i in range(len(words)):
-                if not self.is_filled(words[i]):
-                    words[i] = None
+            g[length] = words[:]
+            for i in range(len(g[length])):
+                if not self.is_filled(g[length][i]):
+                    g[length][i] = None
         return dict(g)
