@@ -231,11 +231,11 @@ class GameTile(glooey.Image):
 
     custom_alignment = "center"
     custom_padding = 10
+    image_source = pyglet.image.load("resources/images/tiles.png")
 
     def __init__(self, interface, char):
         super().__init__()
-        image = pyglet.image.load("resources/images/tiles.png")
-        self.char_grid = pyglet.image.ImageGrid(image, 2, 13)
+        self.char_grid = pyglet.image.ImageGrid(self.image_source, 2, 13)
         self._image = self.char_grid[ord(char.lower()) - ord("a")]
 
 class GameOptionsWidget(glooey.Widget):
@@ -306,12 +306,10 @@ class InformationWidget(glooey.Widget):
         self._attach_child(self.vbox)
 
     def update_display(self):
-        self.vbox.remove(self.label_label)
-        self.vbox.remove(self.info_label)
-        self.label_label = MenuLabel(self.label)
-        self.info_label = MenuLabel(self.information)
-        self.vbox.add(self.label_label)
-        self.vbox.add(self.info_label)
+        self.label_label.text = self.label
+        self.info_label.text = self.information
+        self.label_label._draw()
+        self.info_label._draw()
 
 class GameButtonsWidget(glooey.Widget):
     custom_alignment = "right"
