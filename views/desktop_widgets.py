@@ -30,19 +30,19 @@ class MenuWidget(glooey.Widget):
 
 
         def handle_untimed_btn(source):
-            self.interface.view_events.create(GameMode.UNTIMED, 7)
+            self.interface.view_events.create(GameMode.UNTIMED, 5)
             self.interface.state = DesktopStates.game
 
         def handle_retries_btn(source):
-            self.interface.view_events.create(GameMode.RETRIES, 7)
+            self.interface.view_events.create(GameMode.RETRIES, 5)
             self.interface.state = DesktopStates.game
 
         def handle_timed_btn(source):
-            self.interface.view_events.create(GameMode.TIMED, 7)
+            self.interface.view_events.create(GameMode.TIMED, 5)
             self.interface.state = DesktopStates.game
 
         def handle_timed_retries_btn(source):
-            self.interface.view_events.create(GameMode.TIMED_RETRIES, 7)
+            self.interface.view_events.create(GameMode.TIMED_RETRIES, 5)
             self.interface.state = DesktopStates.game
 
         untimed_btn.push_handlers(on_click=handle_untimed_btn)
@@ -93,17 +93,72 @@ class GameWidget(glooey.Widget):
         self.vbox.add(self.game_options)
         self._attach_child(self.vbox)
 
+    def refresh_board(self):
+        self.game_board_hbox.populate_board()
+
 class GameBoardWidget(glooey.Widget):
 
-    custom_alignment = "center"
+    custom_alignment = "left"
+    custom_horz_padding = 30
 
     def __init__(self, interface):
         super().__init__()
         self.interface = interface
+        self.vbox = glooey.Grid()
+        self._attach_child(self.vbox)
+
+    def populate_board(self):
+
+        #remove all children in game board
+        col = 0
+        row = 0
+        vbox_children = [child for child in self.vbox]
+        for child in vbox_children:
+            if row == 3:
+                col += 1
+                row = 0
+            self.vbox.remove(row, col)
+            row += 1
+
+        #repopulate game board
+        col = 0
+        row = 0
+        for length, words in self.interface.current_game.words_by_length_filled().items():
+            for word in words:
+                if row == 3:
+                    col += 1
+                    row = 0
+                if word is not None:
+                    self.vbox.add(row, col, GameBoardRow(self.interface, word))
+                else:
+                    self.vbox.add(row, col, GameBoardRow(self.interface, " "*length))
+                row += 1
+
+class GameBoardRow(glooey.Widget):
+    custom_alignment = "left"
+
+    def __init__(self, interface, string):
+        super().__init__()
+        self.interface = interface
 
         self.hbox = glooey.HBox()
-        self.hbox.add(MenuLabel("GameBoardWidget"))
-        self._attach_child(self.hbox)
+        for char in string:
+            self.hbox.add(GameBoardTile(interface, char))
+        self._attach_child(self.hbox)    
+
+class GameBoardTile(glooey.Image):
+
+    custom_alignment = "center"
+    custom_padding = 3
+
+    def __init__(self, interface, char):
+        super().__init__()
+        image = pyglet.image.load("resources/images/boardletters.png")
+        self.char_grid = pyglet.image.ImageGrid(image, 3, 9)
+        if char == " ":
+            self._image = self.char_grid[0]
+        else:
+            self._image = self.char_grid[ord(char.lower())-ord("a")+1]
 
 class GameInputWidget(glooey.Widget):
 
@@ -203,4 +258,4 @@ class GameButton(glooey.Button):
         custom_color = "#000000"
 
     class Base(glooey.Background):
-        custom_color = "#aaaaaa"
+        custom_color = "#cccccc"
