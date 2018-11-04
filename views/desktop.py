@@ -16,7 +16,7 @@ class DesktopInterface(Interface):
 
     def __init__(self):
         super().__init__()
-        self.state = DesktopStates.menu
+        self.state = DesktopStates.intro
         self.window = pyglet.window.Window(width=1200, height=900)
 
         background = TiledBackground()
@@ -24,9 +24,9 @@ class DesktopInterface(Interface):
         self.gui = glooey.Gui(self.window)
         self.gui.add(background)
 
-        self.intro = IntroWidget()
-        self.menu = MenuWidget()
-        self.game = GameWidget()
+        self.intro = IntroWidget(self)
+        self.menu = MenuWidget(self)
+        self.game = GameWidget(self)
 
         @self.window.event
         def on_draw():
@@ -69,5 +69,6 @@ class DesktopInterface(Interface):
             pass
 
     def run(self):
+        self.initialize_event_handlers()
+        self.interface_end = False
         pyglet.app.run()
-        print("In DesktopInterface")
