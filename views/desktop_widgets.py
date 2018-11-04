@@ -84,9 +84,9 @@ class GameWidget(glooey.Widget):
         self.interface = interface
 
         self.vbox = glooey.VBox()
-        self.game_board_hbox = GameBoardWidget()
-        self.game_input = GameInputWidget()
-        self.game_options = GameOptionsWidget()
+        self.game_board_hbox = GameBoardWidget(interface)
+        self.game_input = GameInputWidget(interface)
+        self.game_options = GameOptionsWidget(interface)
 
         self.vbox.add(self.game_board_hbox)
         self.vbox.add(self.game_input)
@@ -97,8 +97,9 @@ class GameBoardWidget(glooey.Widget):
 
     custom_alignment = "center"
 
-    def __init__(self):
+    def __init__(self, interface):
         super().__init__()
+        self.interface = interface
 
         self.hbox = glooey.HBox()
         self.hbox.add(MenuLabel("GameBoardWidget"))
@@ -108,23 +109,53 @@ class GameInputWidget(glooey.Widget):
 
     custom_alignment = "center"
 
-    def __init__(self):
+    def __init__(self, interface):
         super().__init__()
+        self.interface = interface
 
         self.vbox = glooey.VBox()
-        self.vbox.add(MenuLabel("GameInputWidget"))
+        self.input_display = GameTileDisplay(interface, "A")
+        self.tile_display = GameTileDisplay(interface, "a")
+        self.vbox.add(self.input_display)
+        self.vbox.add(self.tile_display)
         self._attach_child(self.vbox)
+
+class GameTileDisplay(glooey.Widget):
+
+    custom_alignment = "center"
+
+    def __init__(self, interface, string):
+        super().__init__()
+        self.interface = interface
+
+        self.hbox = glooey.HBox()
+        for char in string:
+            self.hbox.add(GameTile(interface, char))
+        self._attach_child(self.hbox)
+
+class GameTile(glooey.Image):
+
+    custom_alignment = "center"
+    custom_padding = 10
+
+    def __init__(self, interface, char):
+        super().__init__()
+        image = pyglet.image.load("resources/images/tiles.png")
+        self.char_grid = pyglet.image.ImageGrid(image, 2, 13)
+        print(self.char_grid[0])
+        self._image = self.char_grid[0]
 
 class GameOptionsWidget(glooey.Widget):
 
     custom_alignment = "left"
 
-    def __init__(self):
+    def __init__(self, interface):
         super().__init__()
+        self.interface = interface
 
         self.hbox = glooey.HBox()
-        self.hbox.add(GameInformationWidget())
-        self.hbox.add(GameButtonsWidget())
+        self.hbox.add(GameInformationWidget(interface))
+        self.hbox.add(GameButtonsWidget(interface))
         self._attach_child(self.hbox)
 
 class GameInformationWidget(glooey.Widget):
@@ -132,8 +163,9 @@ class GameInformationWidget(glooey.Widget):
     custom_alignment = "left"
     custom_padding = 30
 
-    def __init__(self):
+    def __init__(self, interface):
         super().__init__()
+        self.interface = interface
 
         self.hbox = glooey.HBox()
         self.hbox.add(InformationWidget("Time", "00:00"))
@@ -156,11 +188,11 @@ class InformationWidget(glooey.Widget):
 class GameButtonsWidget(glooey.Widget):
     custom_alignment = "right"
 
-    def __init__(self):
+    def __init__(self, interface):
         super().__init__()
+        self.interface = interface
 
         self.hbox = glooey.HBox()
-
         self.check_ans_button = GameButton("A")
         self.hbox.add(self.check_ans_button)
         self._attach_child(self.hbox)
