@@ -1,8 +1,8 @@
 """
 A basic terminal interface.
 
-:Author:     Jose Enrico Salinas
-:Version:    v20181102
+:Author:     Maded Batara III
+:Version:    v20181104
 """
 
 from engine import GameMode

@@ -3,7 +3,7 @@ A game board (i.e. list of words).
 
 :Author:     Maded Batara III
 :Author:     Jose Enrico Salinas
-:Version:    v20181024
+:Version:    v20181104
 """
 
 from collections import OrderedDict
