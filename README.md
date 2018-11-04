@@ -2,6 +2,8 @@
 
 A simple word unscramble game, written in Python.
 
+Created by Maded Batara III and Jose Enrico Salinas.
+
 ## Setup
 
 Make sure Python >3.6 and [pipenv](https://pipenv.readthedocs.io/en/latest/) is installed on your system. Then simply run
