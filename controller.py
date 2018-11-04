@@ -40,9 +40,10 @@ class Controller:
         query = self.dictionary.filter_from_string(
             word).filter_by_length(3, word_length)
         if game_mode == GameMode.TIMED_RETRIES or game_mode == GameMode.RETRIES:
-            self.current_game = Game(word, query, mistakes=3)
+            self.current_game = Game(
+                word, query, mistakes=3, mode=game_mode)
         else:
-            self.current_game = Game(word, query)
+            self.current_game = Game(word, query, mode=game_mode)
 
     def on_answer(self, word):
         if self.current_game.on_board(word):

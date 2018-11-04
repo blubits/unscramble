@@ -7,6 +7,7 @@ Game instance.
 
 from .game_board import GameBoard
 from .helpers import scrabble_score
+from .game_modes import GameMode
 
 class Game:
     """An instance of the Simple Word Unscrambler Game.
@@ -21,7 +22,8 @@ class Game:
         maximum_score (int): Maximum score achievable by a player.
     """
 
-    def __init__(self, word, query, *, mistakes=None, score=scrabble_score):
+    def __init__(self, word, query, *, mistakes=None, score=scrabble_score,
+                 mode=GameMode.UNTIMED):
         """
         Initializes a new Game.
 
@@ -36,9 +38,12 @@ class Game:
                 operates on unlimited retries.
             score (function: str -> int, optional): Function that determines
                 the point value of a certain word.
+            mode (GameMode, optional): Mode of the game, whether it operates
+                with retries or not.
         """
         self.word = word
         self.board = GameBoard(query)
+        self.mode = mode
         # score
         self.score_function = score
         self.current_score = 0
