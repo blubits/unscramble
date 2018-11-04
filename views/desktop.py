@@ -46,6 +46,11 @@ class DesktopInterface(Interface):
                 self.game.refresh_board()
             self.gui.on_draw()
 
+        @self.window.event()
+        def on_key_press(symbol, modifer):
+            if self.state == DesktopStates.game:
+                print("Received key", chr(symbol))
+
         def intro_state(dt):
             self.state = DesktopStates.intro
 
