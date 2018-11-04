@@ -16,7 +16,7 @@ class DesktopInterface(Interface):
 
     def __init__(self):
         super().__init__()
-        self.state = DesktopStates.game
+        self.state = DesktopStates.menu
         self.window = pyglet.window.Window(width=1200, height=900)
 
         background = TiledBackground()

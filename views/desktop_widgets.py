@@ -18,11 +18,24 @@ class MenuWidget(glooey.Widget):
         super().__init__()
         title = TitleLabel("SWUG 0.1")
 
-        menu_hbox = glooey.HBox()
         untimed_btn = MenuButton("Untimed")
         retries_btn = MenuButton("Retries")
         timed_btn = MenuButton("Timed")
         timed_retries_btn = MenuButton("Timed + Retries")
+
+        def handle_untimed_btn():
+            pass
+
+        def handle_retries_btn():
+            pass
+
+        def handle_timed_btn():
+            pass
+
+        def handle_timed_retries_btn():
+            pass
+
+        menu_hbox = glooey.HBox()
         menu_hbox.add(untimed_btn)
         menu_hbox.add(retries_btn)
         menu_hbox.add(timed_btn)
