@@ -5,7 +5,7 @@ from engine import GameMode
 from .desktop_states import DesktopStates
 
 class IntroWidget(glooey.Widget):
-    
+
     custom_alignment = 'center'
 
     def __init__(self, interface):
@@ -15,7 +15,7 @@ class IntroWidget(glooey.Widget):
         self._attach_child(title)
 
 class MenuWidget(glooey.Widget):
-    
+
     custom_alignment = 'center'
 
     def __init__(self, interface):
@@ -27,7 +27,6 @@ class MenuWidget(glooey.Widget):
         retries_btn = MenuButton("Retries")
         timed_btn = MenuButton("Timed")
         timed_retries_btn = MenuButton("Timed + Retries")
-
 
         def handle_untimed_btn(source):
             self.interface.view_events.create(GameMode.UNTIMED, 5)
@@ -109,7 +108,7 @@ class GameBoardWidget(glooey.Widget):
 
     def populate_board(self):
 
-        #remove all children in game board
+        # remove all children in game board
         col = 0
         row = 0
         vbox_children = [child for child in self.vbox]
@@ -120,7 +119,7 @@ class GameBoardWidget(glooey.Widget):
             self.vbox.remove(row, col)
             row += 1
 
-        #repopulate game board
+        # repopulate game board
         col = 0
         row = 0
         for length, words in self.interface.current_game.words_by_length_filled().items():
@@ -131,7 +130,8 @@ class GameBoardWidget(glooey.Widget):
                 if word is not None:
                     self.vbox.add(row, col, GameBoardRow(self.interface, word))
                 else:
-                    self.vbox.add(row, col, GameBoardRow(self.interface, " "*length))
+                    self.vbox.add(row, col, GameBoardRow(
+                        self.interface, " " * length))
                 row += 1
 
 class GameBoardRow(glooey.Widget):
@@ -144,12 +144,12 @@ class GameBoardRow(glooey.Widget):
         self.hbox = glooey.HBox()
         for char in string:
             self.hbox.add(GameBoardTile(interface, char))
-        self._attach_child(self.hbox)    
+        self._attach_child(self.hbox)
 
 class GameBoardTile(glooey.Image):
 
     custom_alignment = "center"
-    custom_padding = 3
+    custom_padding = 1
 
     def __init__(self, interface, char):
         super().__init__()
@@ -158,7 +158,7 @@ class GameBoardTile(glooey.Image):
         if char == " ":
             self._image = self.char_grid[0]
         else:
-            self._image = self.char_grid[ord(char.lower())-ord("a")+1]
+            self._image = self.char_grid[ord(char.lower()) - ord("a") + 1]
 
 class GameInputWidget(glooey.Widget):
 
@@ -197,7 +197,7 @@ class GameTile(glooey.Image):
         super().__init__()
         image = pyglet.image.load("resources/images/tiles.png")
         self.char_grid = pyglet.image.ImageGrid(image, 2, 13)
-        self._image = self.char_grid[ord(char.lower())-ord("a")]
+        self._image = self.char_grid[ord(char.lower()) - ord("a")]
 
 class GameOptionsWidget(glooey.Widget):
 
@@ -252,7 +252,7 @@ class GameButtonsWidget(glooey.Widget):
         self._attach_child(self.hbox)
 
 class GameButton(glooey.Button):
-    
+
     class Label(glooey.Label):
         custom_padding = 30
         custom_color = "#000000"
