@@ -28,6 +28,12 @@ class MenuWidget(glooey.Widget):
         timed_btn = MenuButton("Timed")
         timed_retries_btn = MenuButton("Timed + Retries")
 
+        def update_timer(source):
+            self.interface.time_remaining -= 1
+            if self.interface.time_remaining <= 0:
+                self.interface.view_events.end()
+                self.interface.on_end()
+
         def handle_untimed_btn(source):
             self.interface.view_events.create(GameMode.UNTIMED, 5)
             self.interface.state = DesktopStates.game
@@ -38,11 +44,16 @@ class MenuWidget(glooey.Widget):
 
         def handle_timed_btn(source):
             self.interface.view_events.create(GameMode.TIMED, 5)
+            self.interface.time_remaining = 60
+            pyglet.clock.schedule_interval(update_timer, 1)
             self.interface.state = DesktopStates.game
 
         def handle_timed_retries_btn(source):
             self.interface.view_events.create(GameMode.TIMED_RETRIES, 5)
+            self.interface.time_remaining = 60
+            pyglet.clock.schedule_interval(update_timer, 1)
             self.interface.state = DesktopStates.game
+    
 
         untimed_btn.push_handlers(on_click=handle_untimed_btn)
         retries_btn.push_handlers(on_click=handle_retries_btn)
@@ -272,6 +283,9 @@ class GameInformationWidget(glooey.Widget):
         self.retries_widget.update_display()
         self.score_widget.information = str(self.interface.current_game.score[0])
         self.score_widget.update_display()
+        if self.interface.time_remaining is not None:
+            self.time_widget.information = str(self.interface.time_remaining)
+            self.time_widget.update_display()
 
 class InformationWidget(glooey.Widget):
 

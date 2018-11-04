@@ -28,6 +28,8 @@ class DesktopInterface(Interface):
         self.menu = MenuWidget(self)
         self.game = GameWidget(self)
 
+        self.time_remaining = None
+
         @self.window.event
         def on_draw():
             if self.state == DesktopStates.intro:
