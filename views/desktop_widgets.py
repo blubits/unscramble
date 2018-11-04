@@ -95,6 +95,10 @@ class GameWidget(glooey.Widget):
 
     def refresh_board(self):
         self.game_board_hbox.populate_board()
+        self.game_input.update_display()
+
+    def handle_keypress(self, key):
+        self.game_input.input_key(chr(key))
 
 class GameBoardWidget(glooey.Widget):
 
@@ -114,7 +118,7 @@ class GameBoardWidget(glooey.Widget):
         row = 0
         vbox_children = [child for child in self.vbox]
         for child in vbox_children:
-            if row == 3:
+            if row == 5:
                 col += 1
                 row = 0
             self.vbox.remove(row, col)
@@ -125,7 +129,7 @@ class GameBoardWidget(glooey.Widget):
         row = 0
         for length, words in self.interface.current_game.words_by_length_filled().items():
             for word in words:
-                if row == 3:
+                if row == 5:
                     col += 1
                     row = 0
                 if word is not None:
@@ -169,11 +173,23 @@ class GameInputWidget(glooey.Widget):
         self.interface = interface
 
         self.vbox = glooey.VBox()
-        self.input_display = GameTileDisplay(interface, "abcdefg")
-        self.tile_display = GameTileDisplay(interface, "abcdefg")
+        self.input_display = GameTileDisplay(interface, "A")
+        self.tile_display = GameTileDisplay(interface, "A")
         self.vbox.add(self.input_display)
         self.vbox.add(self.tile_display)
         self._attach_child(self.vbox)
+
+        self.input_string = ""
+
+    def input_key(self, key):
+        self.game_string = self.interface.current_game.word
+        if key in self.game_string:
+            self.input_string = self.input_string + key
+
+    def update_display(self):
+        self.game_string = self.interface.current_game.word
+        self.input_display.update_display(self.input_string)
+        self.tile_display.update_display(self.game_string)
 
 class GameTileDisplay(glooey.Widget):
 
@@ -182,11 +198,22 @@ class GameTileDisplay(glooey.Widget):
     def __init__(self, interface, string):
         super().__init__()
         self.interface = interface
+        self.string = string
 
         self.hbox = glooey.HBox()
         for char in string:
             self.hbox.add(GameTile(interface, char))
         self._attach_child(self.hbox)
+
+    def update_display(self, string):
+        self.string = string
+
+        hbox_children = [child for child in self.hbox]
+        for child in hbox_children:
+            self.hbox.remove(child)
+
+        for char in string:
+            self.hbox.add(GameTile(self.interface, char))
 
 class GameTile(glooey.Image):
 
