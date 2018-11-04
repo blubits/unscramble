@@ -267,8 +267,8 @@ class GameInformationWidget(glooey.Widget):
     def update_display(self):
         self.retries_widget.information = str(self.interface.current_game.mistakes[1] - self.interface.current_game.mistakes[0])
         self.retries_widget.update_display()
-        self.hbox.remove(self.retries_widget)
-        self.hbox.add(self.retries_widget)
+        self.score_widget.information = str(self.interface.current_game.score[0])
+        self.score_widget.update_display()
 
 class InformationWidget(glooey.Widget):
 
