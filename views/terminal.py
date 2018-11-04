@@ -12,12 +12,13 @@ class TerminalInterface(Interface):
 
     def __init__(self):
         super().__init__()
-        self.game_end = True
+        self.interface_end = True
 
     def introduce(self):
         print("Welcome to the SWUG terminal interface!")
         print("Generating a 7-letter puzzle...")
         print()
+        self.view_events.create(GameMode.RETRIES, 7)
 
     def ask_input(self):
         word = input("Input a word > ")
@@ -50,20 +51,12 @@ class TerminalInterface(Interface):
         else:
             print("Game over :(")
         print("Score: {0}/{1}".format(*self.current_game.score))
-        self.game_end = True
+        self.interface_end = True
 
     def run(self):
-        # attempt to register controller event handlers
-        if self.controller is None:
-            raise RuntimeError("Controller not registered in the view yet")
-        else:
-            self.controller.controller_events.answer_correct += self.on_answer_correct
-            self.controller.controller_events.answer_wrong += self.on_answer_wrong
-            self.controller.controller_events.answer_duplicate += self.on_answer_duplicate
-            self.controller.controller_events.end += self.on_end
+        self.initialize_event_handlers()
         self.introduce()
-        self.view_events.create(GameMode.RETRIES, 7)
-        self.game_end = False
-        while not self.game_end:
+        self.interface_end = False
+        while not self.interface_end:
             self.print_board()
             self.ask_input()

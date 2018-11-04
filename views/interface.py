@@ -24,6 +24,15 @@ class Interface:
         """Game: Current game on the controller."""
         return self.controller.current_game
 
+    def initialize_event_handlers(self):
+        if self.controller is None:
+            raise RuntimeError("Controller not registered in the view yet")
+        else:
+            self.controller.controller_events.answer_correct += self.on_answer_correct
+            self.controller.controller_events.answer_wrong += self.on_answer_wrong
+            self.controller.controller_events.answer_duplicate += self.on_answer_duplicate
+            self.controller.controller_events.end += self.on_end
+
     def on_answer_correct(self):
         raise NotImplementedError
 
