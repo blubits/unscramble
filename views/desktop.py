@@ -43,6 +43,7 @@ class DesktopInterface(Interface):
             elif self.state == DesktopStates.game:
                 self.clear_window()
                 self.gui.add(self.game)
+                self.game.refresh_board()
             self.gui.on_draw()
 
         def intro_state(dt):
