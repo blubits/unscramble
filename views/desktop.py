@@ -83,6 +83,9 @@ class DesktopInterface(Interface):
     def on_answer_duplicate(self, word):
         pass
 
+    def on_end(self):
+        self.state = DesktopStates.menu
+
     def run(self):
         self.initialize_event_handlers()
         self.interface_end = False

@@ -95,6 +95,7 @@ class GameWidget(glooey.Widget):
     def refresh_board(self):
         self.game_board_hbox.populate_board()
         self.game_input.update_display()
+        self.game_options.update_display()
 
     def handle_keypress(self, key):
         self.game_input.input_key(chr(key))
@@ -236,9 +237,14 @@ class GameOptionsWidget(glooey.Widget):
         self.game_input = game_input
 
         self.hbox = glooey.HBox()
-        self.hbox.add(GameInformationWidget(interface))
-        self.hbox.add(GameButtonsWidget(interface, game_input))
+        self.game_info = GameInformationWidget(interface)
+        self.game_buttons = GameButtonsWidget(interface, game_input)
+        self.hbox.add(self.game_info)
+        self.hbox.add(self.game_buttons)
         self._attach_child(self.hbox)
+
+    def update_display(self):
+        self.game_info.update_display()
 
 class GameInformationWidget(glooey.Widget):
 
@@ -250,10 +256,19 @@ class GameInformationWidget(glooey.Widget):
         self.interface = interface
 
         self.hbox = glooey.HBox()
-        self.hbox.add(InformationWidget("Time", "00:00"))
-        self.hbox.add(InformationWidget("Retries", "3"))
-        self.hbox.add(InformationWidget("Score", "0"))
+        self.time_widget = InformationWidget("Time", "--:--")
+        self.retries_widget = InformationWidget("Retries", "3")
+        self.score_widget = InformationWidget("Score", "0")
+        self.hbox.add(self.time_widget)
+        self.hbox.add(self.retries_widget)
+        self.hbox.add(self.score_widget)
         self._attach_child(self.hbox)
+
+    def update_display(self):
+        self.retries_widget.information = str(self.interface.current_game.mistakes[1] - self.interface.current_game.mistakes[0])
+        self.retries_widget.update_display()
+        self.hbox.remove(self.retries_widget)
+        self.hbox.add(self.retries_widget)
 
 class InformationWidget(glooey.Widget):
 
@@ -262,10 +277,24 @@ class InformationWidget(glooey.Widget):
     def __init__(self, label, information):
         super().__init__()
 
+        self.label = label
+        self.information = information
+
+        self.label_label = MenuLabel(label)
+        self.info_label = MenuLabel(information)
+
         self.vbox = glooey.VBox()
-        self.vbox.add(MenuLabel(label))
-        self.vbox.add(MenuLabel(information))
+        self.vbox.add(self.label_label)
+        self.vbox.add(self.info_label)
         self._attach_child(self.vbox)
+
+    def update_display(self):
+        self.vbox.remove(self.label_label)
+        self.vbox.remove(self.info_label)
+        self.label_label = MenuLabel(self.label)
+        self.info_label = MenuLabel(self.information)
+        self.vbox.add(self.label_label)
+        self.vbox.add(self.info_label)
 
 class GameButtonsWidget(glooey.Widget):
     custom_alignment = "right"
