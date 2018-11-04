@@ -1,8 +1,9 @@
 """
-An enumeration of game modes
+An enumeration of game modes.
 
+:Author:     Maded Batara III
 :Author:     Jose Enrico Salinas
-:Version:    v20181102
+:Version:    v20181104
 """
 
 from enum import Enum

@@ -3,7 +3,7 @@ A game board (i.e. list of words).
 
 :Author:     Maded Batara III
 :Author:     Jose Enrico Salinas
-:Version:    v20181024
+:Version:    v20181104
 """
 
 from collections import OrderedDict
@@ -105,8 +105,8 @@ class GameBoard:
         """
         g = OrderedDict()
         for length, words in sorted(self.words_by_length().items()):
-            g[length] = words
-            for i in range(len(words)):
-                if not self.is_filled(words[i]):
-                    words[i] = None
+            g[length] = words[:]
+            for i in range(len(g[length])):
+                if not self.is_filled(g[length][i]):
+                    g[length][i] = None
         return dict(g)

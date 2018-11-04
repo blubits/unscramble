@@ -34,7 +34,7 @@ LETTER_POINTS = {
     'z': 10
 }
 
-def score(word):
+def scrabble_score(word):
     """
     Scores a word using Scrabble point values.
     """

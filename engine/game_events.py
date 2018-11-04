@@ -42,13 +42,22 @@ class ControllerEvents(events.Events):
             as correct, i.e. on the board and not filled up. The view
             should prompt the user accordingly.
 
+            Messages:
+                word (str): Word that was filled up.
+
         answer_wrong: Raise when an answer from the view is determined
             as wrong, i.e. not on the board. The view should prompt
             the user accordingly.
 
+            Messages:
+                word (str): Word that was filled up.
+
         answer_duplicate: Raise when an answer from the view is determined
             as a duplicate, i.e. already on the board. The view should
             prompt the user accordingly.
+
+            Messages:
+                word (str): Word that was filled up.
 
         end: Raise when a game is ended, through model manipulation on
             the controller or otherwise. The view should display end game

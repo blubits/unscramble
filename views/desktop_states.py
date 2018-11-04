@@ -1,5 +1,6 @@
 """
-Enum class for desktop states
+Enum class for desktop states.
+
 :Author:     Jose Enrico Salinas
 :Version:    v20181021
 """
