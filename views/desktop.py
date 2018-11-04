@@ -74,6 +74,15 @@ class DesktopInterface(Interface):
         except glooey.helpers.UsageError:
             pass
 
+    def on_answer_correct(self, word):
+        pass
+
+    def on_answer_wrong(self, word):
+        pass
+
+    def on_answer_duplicate(self, word):
+        pass
+
     def run(self):
         self.initialize_event_handlers()
         self.interface_end = False

@@ -28,7 +28,6 @@ class MenuWidget(glooey.Widget):
         timed_btn = MenuButton("Timed")
         timed_retries_btn = MenuButton("Timed + Retries")
 
-
         def handle_untimed_btn(source):
             self.interface.view_events.create(GameMode.UNTIMED, 5)
             self.interface.state = DesktopStates.game
@@ -86,7 +85,7 @@ class GameWidget(glooey.Widget):
         self.vbox = glooey.VBox()
         self.game_board_hbox = GameBoardWidget(interface)
         self.game_input = GameInputWidget(interface)
-        self.game_options = GameOptionsWidget(interface)
+        self.game_options = GameOptionsWidget(interface, self)
 
         self.vbox.add(self.game_board_hbox)
         self.vbox.add(self.game_input)
@@ -230,13 +229,14 @@ class GameOptionsWidget(glooey.Widget):
 
     custom_alignment = "left"
 
-    def __init__(self, interface):
+    def __init__(self, interface, game_input):
         super().__init__()
         self.interface = interface
+        self.game_input = game_input
 
         self.hbox = glooey.HBox()
         self.hbox.add(GameInformationWidget(interface))
-        self.hbox.add(GameButtonsWidget(interface))
+        self.hbox.add(GameButtonsWidget(interface, game_input))
         self._attach_child(self.hbox)
 
 class GameInformationWidget(glooey.Widget):
@@ -269,14 +269,20 @@ class InformationWidget(glooey.Widget):
 class GameButtonsWidget(glooey.Widget):
     custom_alignment = "right"
 
-    def __init__(self, interface):
+    def __init__(self, interface, game_input):
         super().__init__()
         self.interface = interface
+        self.game_input = game_input
 
-        self.hbox = glooey.HBox()
-        self.check_ans_button = GameButton("A")
-        self.hbox.add(self.check_ans_button)
-        self._attach_child(self.hbox)
+        def handle_ans_btn(source):
+            self.interface.view_events.answer(self.game_input.game_input.input_string)
+            self.game_input.game_input.input_string = ""
+
+        hbox = glooey.HBox()
+        check_ans_button = GameButton("Answer")
+        check_ans_button.push_handlers(on_click=handle_ans_btn)
+        hbox.add(check_ans_button)
+        self._attach_child(hbox)
 
 class GameButton(glooey.Button):
     
