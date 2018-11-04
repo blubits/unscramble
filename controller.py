@@ -46,12 +46,12 @@ class Controller:
 
     def on_answer(self, word):
         if self.current_game.on_board(word):
-            self.controller_events.answer_duplicate()
+            self.controller_events.answer_duplicate(word)
         else:
             if self.current_game.answer(word):
-                self.controller_events.answer_correct()
+                self.controller_events.answer_correct(word)
             else:
-                self.controller_events.answer_wrong()
+                self.controller_events.answer_wrong(word)
         if self.current_game.is_game_over:
             self.controller_events.end()
 

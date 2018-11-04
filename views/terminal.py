@@ -33,15 +33,15 @@ class TerminalInterface(Interface):
                 length, len(filled_in_words), len(words), ' '.join(filled_in_words))
             )
 
-    def on_answer_correct(self):
+    def on_answer_correct(self, word):
         print("Correct answer!")
         print()
 
-    def on_answer_wrong(self):
+    def on_answer_wrong(self, word):
         print("Wrong answer!")
         print()
 
-    def on_answer_duplicate(self):
+    def on_answer_duplicate(self, word):
         print("You already answered that!")
         print()
 
