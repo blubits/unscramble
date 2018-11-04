@@ -1,12 +1,16 @@
 import pyglet
 import glooey
 
+from engine import GameMode
+from .desktop_states import DesktopStates
+
 class IntroWidget(glooey.Widget):
     
     custom_alignment = 'center'
 
-    def __init__(self):
+    def __init__(self, interface):
         super().__init__()
+        self.interface = interface
         title = TitleLabel("SWUG")
         self._attach_child(title)
 
@@ -14,15 +18,39 @@ class MenuWidget(glooey.Widget):
     
     custom_alignment = 'center'
 
-    def __init__(self):
+    def __init__(self, interface):
         super().__init__()
+        self.interface = interface
         title = TitleLabel("SWUG 0.1")
 
-        menu_hbox = glooey.HBox()
         untimed_btn = MenuButton("Untimed")
         retries_btn = MenuButton("Retries")
         timed_btn = MenuButton("Timed")
         timed_retries_btn = MenuButton("Timed + Retries")
+
+
+        def handle_untimed_btn(source):
+            self.interface.view_events.create(GameMode.UNTIMED, 7)
+            self.interface.state = DesktopStates.game
+
+        def handle_retries_btn(source):
+            self.interface.view_events.create(GameMode.RETRIES, 7)
+            self.interface.state = DesktopStates.game
+
+        def handle_timed_btn(source):
+            self.interface.view_events.create(GameMode.TIMED, 7)
+            self.interface.state = DesktopStates.game
+
+        def handle_timed_retries_btn(source):
+            self.interface.view_events.create(GameMode.TIMED_RETRIES, 7)
+            self.interface.state = DesktopStates.game
+
+        untimed_btn.push_handlers(on_click=handle_untimed_btn)
+        retries_btn.push_handlers(on_click=handle_retries_btn)
+        timed_btn.push_handlers(on_click=handle_timed_btn)
+        timed_retries_btn.push_handlers(on_click=handle_timed_retries_btn)
+
+        menu_hbox = glooey.HBox()
         menu_hbox.add(untimed_btn)
         menu_hbox.add(retries_btn)
         menu_hbox.add(timed_btn)
@@ -51,8 +79,9 @@ class TitleLabel(MenuLabel):
 
 class GameWidget(glooey.Widget):
 
-    def __init__(self):
+    def __init__(self, interface):
         super().__init__()
+        self.interface = interface
 
         self.vbox = glooey.VBox()
         self.game_board_hbox = GameBoardWidget()

@@ -8,9 +8,9 @@ pyglet = "*"
 urwid = "*"
 glooey = "*"
 events = "*"
+pylint = "*"
 
 [dev-packages]
-pylint = "*"
 "flake8" = "*"
 "autopep8" = "*"
 
