@@ -6,12 +6,20 @@ A simple word unscramble game, written in Python.
 
 Make sure Python >3.6 and [pipenv](https://pipenv.readthedocs.io/en/latest/) is installed on your system. Then simply run
 
-```
+```bash
 $ pipenv install
-$ pipenv run python main.py
+$ pipenv run python main.py -d
 ```
 
 to start the game.
+
+Run
+
+```bash
+$ pipenv run python main.py --help
+```
+
+for usage information.
 
 ---
 
@@ -42,24 +50,35 @@ class NewInterface(Interface):
         super().__init__()
 
     def on_answer_correct(self):
-        raise NotImplementedError
+        # code here
+        pass
 
     def on_answer_wrong(self):
-        raise NotImplementedError
+        # code here
+        pass
 
     def on_answer_duplicate(self):
-        raise NotImplementedError
+        # code here
+        pass
 
     def on_end(self):
-        raise NotImplementedError
+        # code here
+        pass
 
     def run(self):
-        raise NotImplementedError
+        # code here
+        pass
 
 ```
 
-TODO: Complete extensibility documentation.
+To send information to the controller, you can send these three events:
+* `self.view_events.create(game_mode, word_length)` to create a new game.
+* `self.view_events.answer(word)` to fill up the game's game board.
+* `self.view_events.end()` to end the game on the controller.
 
+You must also expect four events from the controller: these are the four event listeners seen above (`on_*`).
+
+Feel free to look at the documentation in `interface.py` for implementation details; for a real-world example of an interface, look at `terminal.py`, a CLI implementation of the Interface class.
 
 ## Credits
 
