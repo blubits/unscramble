@@ -265,7 +265,10 @@ class GameInformationWidget(glooey.Widget):
         self._attach_child(self.hbox)
 
     def update_display(self):
-        self.retries_widget.information = str(self.interface.current_game.mistakes[1] - self.interface.current_game.mistakes[0])
+        if self.interface.current_game.mistakes[1] is not None:
+            self.retries_widget.information = str(self.interface.current_game.mistakes[1] - self.interface.current_game.mistakes[0])
+        else:
+            self.retries_widget.information = "--"
         self.retries_widget.update_display()
         self.score_widget.information = str(self.interface.current_game.score[0])
         self.score_widget.update_display()
