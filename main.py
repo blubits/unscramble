@@ -11,13 +11,15 @@ import sys
 from views import DesktopInterface, TerminalInterface
 from controller import Controller
 
+USAGE = """Usage: python main.py [FILE] [-d] [--help]
+Load the SWUG game, using FILE as the dictionary if given.
+    -t              run in terminal mode (default)
+    -d              run in desktop mode
+    -h, --help      show this help message"""
+
 def main():
     if '-h' in sys.argv or '--help' in sys.argv:
-        print("Usage: python main.py [FILE] [-d] [--help]")
-        print("Load the SWUG game, using FILE as the dictionary if given.")
-        print("    -t            run in terminal mode (default)")
-        print("    -d            run in desktop mode")
-        print("    -h, --help    print this help message")
+        print(USAGE)
         exit(0)
 
     if len(sys.argv) > 1 and sys.argv[1].endswith(".txt"):
