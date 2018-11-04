@@ -114,8 +114,8 @@ class GameInputWidget(glooey.Widget):
         self.interface = interface
 
         self.vbox = glooey.VBox()
-        self.input_display = GameTileDisplay(interface, "A")
-        self.tile_display = GameTileDisplay(interface, "a")
+        self.input_display = GameTileDisplay(interface, "abcdefg")
+        self.tile_display = GameTileDisplay(interface, "abcdefg")
         self.vbox.add(self.input_display)
         self.vbox.add(self.tile_display)
         self._attach_child(self.vbox)
@@ -142,8 +142,7 @@ class GameTile(glooey.Image):
         super().__init__()
         image = pyglet.image.load("resources/images/tiles.png")
         self.char_grid = pyglet.image.ImageGrid(image, 2, 13)
-        print(self.char_grid[0])
-        self._image = self.char_grid[0]
+        self._image = self.char_grid[ord(char.lower())-ord("a")]
 
 class GameOptionsWidget(glooey.Widget):
 
